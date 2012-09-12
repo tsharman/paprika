@@ -1,6 +1,7 @@
 # Django settings for paprika project.
 
 import os.path
+from paprika.local_settings import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -15,11 +16,11 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': db_name,                      # Or path to database file if using sqlite3.
+        'USER': db_user,                      # Not used with sqlite3.
+        'PASSWORD': db_pass,                  # Not used with sqlite3.
+        'HOST': db_host,                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
 }
