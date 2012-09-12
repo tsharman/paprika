@@ -133,6 +133,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'paprika',
+    'south',
     'compressor',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
