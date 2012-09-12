@@ -1,1 +1,12 @@
+{% load compress %}
+<html>
+<head>
+  {% compress css %}
+  <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/home.less" />
+  {% endcompress %}
+</head>
+<body>
+</body>
+</html>
+
 <h1>Prashanth is one cool cat</h1>

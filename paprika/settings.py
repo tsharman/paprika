@@ -60,11 +60,11 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_URL = '/static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(PROJECT_DIR, 'static')
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -76,10 +76,20 @@ STATICFILES_DIRS = (
 # List of finder classes that know how to find static files in
 # various locations.
 STATICFILES_FINDERS = (
+    'compressor.finders.CompressorFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
+
+
+COMPRESS_PRECOMPILERS = (
+  ('text/less', 'lessc {infile} {outfile}'),
+)
+
+COMPRESS_OUTPUT_DIR = ''
+
+
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'e62h$88!hldz0#6#$is*8%=pw!v6ew48k)ld$ff)mz_ayrc4=@'
@@ -120,6 +130,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'paprika',
+    'compressor',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
