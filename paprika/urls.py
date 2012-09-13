@@ -9,6 +9,8 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'paprika.views.home'),
     url(r'^login/', 'paprika.views.signin'),
+    url(r'^logout/', 'paprika.views.signout'),
+    url(r'^u/(?P<username>.+)/$', 'paprika.views.user'),
     # Examples:
     # url(r'^$', 'paprika.views.home', name='home'),
     # url(r'^paprika/', include('paprika.foo.urls')),
