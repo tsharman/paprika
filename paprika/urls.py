@@ -8,7 +8,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^$', 'paprika.views.home'),
-    url(r'^login/', 'paprika.views.login'),
+    url(r'^login/', 'paprika.views.signin'),
     # Examples:
     # url(r'^$', 'paprika.views.home', name='home'),
     # url(r'^paprika/', include('paprika.foo.urls')),
