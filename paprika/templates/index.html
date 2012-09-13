@@ -1,0 +1,26 @@
+{% load compress %}
+<html>
+<head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> 
+  {% compress css %}
+  <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/home.less" />
+  {% endcompress %}
+</head>
+<body>
+  <div id="container">
+    <img src="{{ STATIC_URL }}img/logo.png" />
+    <h1>Paprika</h1>
+    <p>A friendly order tracking tool.</p>
+    <p>Made with &hearts; in Ann Arbor.</p> 
+    <div id="login_container">
+      <form method="POST" action="/login/">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username"/>
+        <input type="password" name="password" placeholder="Password" />
+        <input class="btn btn_green" type="submit" value="Login" /> 
+      </form>
+    </div>
+  </div>
+</body>
+</html>
+

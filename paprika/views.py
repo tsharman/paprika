@@ -4,8 +4,8 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 
 
-def home(request):
-  return render(request, 'home.html')
+def index(request):
+  return render(request, 'index.html')
 
 def signin(request):
   if request.method == 'POST':
@@ -15,7 +15,7 @@ def signin(request):
     if user is not None:
       if user.is_active:
         login(request, user)
-        return HttpResponseRedirect('/u/' + user.username)
+        return HttpResponseRedirect('/home/')
       else:
         return HttpResponse('You have been banned!')
     else:
@@ -28,7 +28,5 @@ def signout(request):
   return HttpResponse('logged out!')
 
 @login_required(login_url='/')
-def user(request, username):
-  return render(request, 'user.html', {
-      'username' : username
-    }) 
+def home(request):
+  return render(request, 'home.html') 
