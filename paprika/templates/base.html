@@ -1,0 +1,25 @@
+{% load compress %}
+<html>
+<head>
+  <title>Paprika</title>
+  {% compress css %}
+    {% block less %}
+    {% endblock %} 
+    <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/base.less" />
+  {% endcompress %}
+</head>
+<body>
+  <div id="heading">
+    <h3>Paprika</h3>
+    <div id="nav">
+      <a href="#">Orders</a>
+      <a href="#">Flows</a>
+      <a href="#">Account</a>
+    </div>
+  </div>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>
