@@ -28,5 +28,5 @@ def signout(request):
   return HttpResponse('logged out!')
 
 @login_required(login_url='/')
-def home(request):
-  return render(request, 'home.html') 
+def orders(request):
+  return render(request, 'orders.html') 
