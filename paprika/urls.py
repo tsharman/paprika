@@ -6,7 +6,7 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
     url(r'^$', 'paprika.views.home'),
-    url(r'^login/', 'paprika.views.login'),
+    url(r'^login/', 'paprika.views.signin'),
     # Examples:
     # url(r'^$', 'paprika.views.home', name='home'),
     # url(r'^paprika/', include('paprika.foo.urls')),
