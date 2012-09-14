@@ -3,4 +3,36 @@
 @import "input.less";
 @import "buttons.less";
 
+#left_box {
+  display: inline-block;
+  width: 200px;
+  border-right: 1px solid #999;
+  vertical-align: top;
+}
+#right_box {
+  width: 759px;
+  display: inline-block;
+  position: relative;
+}
 
+
+#sub_nav {
+}
+  #sub_nav a {
+    display: block;
+    padding: 5px;
+  }
+    #sub_nav a:hover {
+      background: #999;
+    }
+
+#add_btn {
+  color: #eee;
+  position: absolute;
+  right: 0;
+  background: @paprika-green;
+}
+  #add_btn:hover {
+    background: #fff;
+    color: @paprika-pink;
+  }
