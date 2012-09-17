@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block less %}
+  <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/orders.less" />
+{% endblock %}
+
+{% block content %}
+<div id="left_box">
+  <div id="sub_nav">
+    <a href="#">Current</a>
+    <a href="#">Done</a>
+    <a href="#">Canceled</a>
+  </div>
+</div><div id="right_box">
+  <a href="#" id="add_btn" class="btn">+ Add an order</a>
+  <div id="order_list">
+  </div>
+</div>
+
+{% endblock %}

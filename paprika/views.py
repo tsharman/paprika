@@ -15,7 +15,7 @@ def signin(request):
     if user is not None:
       if user.is_active:
         login(request, user)
-        return HttpResponseRedirect('/home/')
+        return HttpResponseRedirect('/orders/')
       else:
         return HttpResponse('You have been banned!')
     else:
@@ -28,5 +28,5 @@ def signout(request):
   return HttpResponse('logged out!')
 
 @login_required(login_url='/')
-def home(request):
-  return render(request, 'home.html') 
+def orders(request):
+  return render(request, 'orders.html') 
