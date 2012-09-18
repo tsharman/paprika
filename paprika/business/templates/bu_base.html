@@ -9,17 +9,19 @@
   {% endcompress %}
 </head>
 <body>
+<div id="container">
   <div id="heading">
     <h3>Paprika</h3>
     <div id="nav">
-      <a href="#">Orders</a>
-      <a href="#">Flows</a>
-      <a href="#">Account</a>
+      <a href="/bu/orders/">Orders</a>
+      <a href="/bu/flows/">Flows</a>
+      <a href="/bu/account/">Account</a>
     </div>
   </div>
   <div id="content">
     {% block content %}
     {% endblock %}
   </div>
+</div>
 </body>
 </html>
