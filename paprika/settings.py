@@ -119,6 +119,8 @@ WSGI_APPLICATION = 'paprika.wsgi.application'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_DIR, "templates/"),
+    os.path.join(PROJECT_DIR, "business/templates/"),
+    os.path.join(PROJECT_DIR, "customer/templates/"),
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.

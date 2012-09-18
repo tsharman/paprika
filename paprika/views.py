@@ -15,7 +15,7 @@ def signin(request):
     if user is not None:
       if user.is_active:
         login(request, user)
-        return HttpResponseRedirect('/orders/')
+        return HttpResponseRedirect('/bu/orders/')
       else:
         return HttpResponse('You have been banned!')
     else:
