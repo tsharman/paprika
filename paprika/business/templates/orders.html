@@ -1,14 +1,29 @@
 {% extends "bu_base.html" %}
+
+{% block js %}
+  <script type="text/javascript" src="{{ STATIC_URL }}js/orders.js" />
+{% endblock %}
+
 {% block less %}
   <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/orders.less" />
+{% endblock %}
+
+{% block dialogs %}
+  <div id="add_order_dialog" class="dialog">
+    <div class="close_dialog">x</div>
+    <h2 class="title">Add an order</h2>
+    <form method="POST" action="/bu/orders/add">
+      <input type="text" name="phone" placeholder="Phone number"/>
+    </form>
+  </div>
 {% endblock %}
 
 {% block content %}
 <div id="left_box">
   <div id="sub_nav">
-    <a href="#">Current</a>
-    <a href="#">Done</a>
-    <a href="#">Canceled</a>
+    <a href="/bu/orders/current/">Current</a>
+    <a href="/bu/orders/done/">Done</a>
+    <a href="/bu/orders/canceled/">Canceled</a>
   </div>
 </div><div id="right_box">
   <a href="#" id="add_btn" class="btn">+ Add an order</a>

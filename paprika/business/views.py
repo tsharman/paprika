@@ -1,11 +1,11 @@
 # Create your views here.
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render
-
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 
 @login_required(login_url='/')
 def orders(request):
-  return render(request, 'orders.html')
+  return render_to_response('orders.html', {}, context_instance=RequestContext(request))
 
 @login_required(login_url='/')
 def flows(request):
