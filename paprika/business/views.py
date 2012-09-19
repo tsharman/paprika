@@ -5,7 +5,9 @@ from django.template import RequestContext
 
 @login_required(login_url='/')
 def orders(request):
-  return render_to_response('orders.html', {}, context_instance=RequestContext(request))
+  from paprika.models import Order
+  orders = Order.objects.filter(merchant=request.user)
+  return render_to_response('orders.html', {'orders' : orders }, context_instance=RequestContext(request))
 
 @login_required(login_url='/')
 def flows(request):
