@@ -7,11 +7,11 @@
 #left_box {
   display: inline-block;
   width: 150px;
-  border-right: 1px solid #999;
   vertical-align: top;
 }
 #right_box {
   width: 687px;
+  border-left: 1px solid #999;
   display: inline-block;
   position: relative;
 }
@@ -45,7 +45,47 @@
 
 #order_list {
   margin-top: 50px;
-  width: 740px;
   margin-left: auto;
   margin-right: auto;
+  padding: 0px 10px 0px 10px;
 }
+  #order_list .order {
+    border: 1px solid #999;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+    #order_list .order .customer {
+      font-size: 20px;
+    }
+    #order_list .order .customer_email {
+      font-size: 17px;
+      color: @paprika-pink;
+    }
+
+.stages {
+  margin-top: 10px;
+  overflow: auto;
+  background: #eee;
+}
+  .stages .stage {
+    height: 30px;
+    position: relative;
+    padding: 20px 0px;
+    float: left;
+    color: #aaa;
+    text-align: center;
+  }
+    .stages .stage .start_here {
+      display: none;
+    }
+    .stages .stage .status_bar {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 15px;
+      background: #888;
+      height: 100%;
+    }
+    .stages .stage h4 {
+      line-height: 30px;
+    }
