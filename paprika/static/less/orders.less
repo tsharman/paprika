@@ -47,45 +47,67 @@
   margin-top: 50px;
   margin-left: auto;
   margin-right: auto;
-  padding: 0px 10px 0px 10px;
+  padding: 20px 10px 10px 10px;
+  background: #eee;
 }
   #order_list .order {
-    border: 1px solid #999;
     padding: 10px;
     margin-bottom: 10px;
+    background: white;
+    box-shadow: 0px 0px 2px 2px #ccc;
+    word-wrap: break-word;
   }
     #order_list .order .customer {
       font-size: 20px;
+      font-weight: 600;
+      color: #ccc;
+      text-transform: uppercase;
     }
     #order_list .order .customer_email {
-      font-size: 17px;
+      font-size: 15px;
+      font-weight: 600;
       color: @paprika-pink;
     }
 
 .stages {
+  height: 100px;
   margin-top: 10px;
   overflow: auto;
   background: #eee;
 }
   .stages .stage {
-    height: 30px;
+    height: 100%;
     position: relative;
-    padding: 20px 0px;
     float: left;
     color: #aaa;
     text-align: center;
+    cursor: pointer;
+    display: table;
   }
     .stages .stage .start_here {
       display: none;
+      line-height: 100px;
     }
     .stages .stage .status_bar {
       position: absolute;
-      top: 0px;
-      left: 0px;
-      width: 15px;
+      top: 0; left: 0;
       background: #888;
       height: 100%;
+      line-height: 100px;
+      color: #ddd;
+      font-size: 20px;
+      padding: 0px 5px;
     }
     .stages .stage h4 {
-      line-height: 30px;
+      display: table-cell;
+      padding-left: 25px;
+      vertical-align: middle;
     }
+
+
+#add_order_dialog {
+}
+  #add_order_dialog form {
+  }
+
+
