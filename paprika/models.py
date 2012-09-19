@@ -22,8 +22,8 @@ class Order(models.Model):
   cust_email = models.EmailField(max_length=254)
 
 class BusinessProfile(models.Model):
-  user = models.OneToOneField(User)
-  business_name = models.CharField(max_length=100)
+  user = models.OneToOneField(User, primary_key=True)
+  business_name = models.CharField(max_length=100, blank=False)
 
 
 
