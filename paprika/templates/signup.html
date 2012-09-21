@@ -1,0 +1,22 @@
+{% load compress %}
+<html>
+<head>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> 
+  {% compress css %}
+  <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/index.less" />
+  {% endcompress %}
+</head>
+
+<body>
+  <div id="container"> 
+    <form method="POST" action="/signup/">
+      {% csrf_token %}
+      <input type="text" name="username" placeholder="Username"/>
+      <input type="text" name="email" placeholder="Email"/>
+      <input type="password" name="password" placeholder="Password" />
+      <input type="text" name="business_name" placeholder="Business Name"/>
+      <input class="btn btn_green" type="submit" value="Login" /> 
+    </form>
+  </div>
+</body>
+
