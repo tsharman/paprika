@@ -3,13 +3,15 @@
 <head>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> 
   {% compress css %}
-  <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/index.less" />
+  <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/signup.less" />
   {% endcompress %}
 </head>
 
 <body>
-  <div id="container"> 
-    <form method="POST" action="/signup/">
+  <div id="container">
+    <h1>Paprika</h1>
+    <h3>Registration<h3>
+    <form method="POST" action="/signup/" id="signup">
       {% csrf_token %}
       <input type="text" name="username" placeholder="Username"/>
       <input type="text" name="email" placeholder="Email"/>
