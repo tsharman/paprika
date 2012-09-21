@@ -21,6 +21,9 @@ class Order(models.Model):
   cust_name = models.CharField(max_length=50)
   cust_phone = USPhoneNumberField()
   cust_email = models.EmailField(max_length=254)
+  notes = models.CharField(max_length=300)
+  time_entered = models.DateTimeField()
+
 
 class BusinessProfile(models.Model):
   user = models.OneToOneField(User, primary_key=True)
