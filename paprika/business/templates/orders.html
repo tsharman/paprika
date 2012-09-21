@@ -14,13 +14,18 @@
     <h2 class="title">Add an order</h2>
     <form method="POST" action="/bu/orders/">
       {% csrf_token %}
-      <input type="text" name="cust_name" placeholder="Customer name" />
-      <input type="text" name="cust_phone" placeholder="Phone number"/>
+      <p><input type="text" name="cust_name" placeholder="Customer name" /></p>
+      <p>
+        <input type="text" name="cust_phone" placeholder="Phone number"/>
+        <input type="text" name="cust_email" placeholder="Email address" />
+      </p>
       <select name="flow">
         {% for flow in user.flows.all %}
-          <option value={{ flow.flow_name }}>{{ flow.flow_name }}</option>
+          <option value={{ flow.id }}>{{ flow.flow_name }}</option>
         {% endfor %}
       </select>
+      <input type="text" name="order_code" placeholder="Order code"/>
+      <input type="hidden" value="1" />
       <input type="submit" class="btn" value="Add Order" />
     </form>
   </div>
