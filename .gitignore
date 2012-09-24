@@ -4,3 +4,6 @@
 *.swp
 local_settings.py
 css/
+*~
+*.swp
+*.swo
