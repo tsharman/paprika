@@ -4,5 +4,13 @@
 {% endblock %}
 
 {% block content %}
-
+<a href="#" id="add_flow_btn" class="btn">+ Create a flow</a>
+<div id="flow_list">
+  {% for flow in user.flows.all %}
+    <h1>{{ flow.flow_name }}</h1>
+    {% for stage in flow.stages.all %}
+      <h2>{{ stage.title }}</h2>
+    {% endfor %}
+  {% endfor %}
+</div>
 {% endblock %}

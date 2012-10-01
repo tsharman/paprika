@@ -13,8 +13,8 @@ def orders(request):
   elif request.method == 'POST':
     from paprika.business.forms import OrderForm
     order = OrderForm(request.POST)
-    if order.is_valid:
-      return HttpResponse("not valid!")
+    if not order.is_valid():
+      return HttpResponse("not valid!" + request.POST.get('cust_name'))
     else:
       return HttpResponse('added order!') 
 
