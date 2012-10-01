@@ -16,14 +16,19 @@ class Stage(models.Model):
 class Order(models.Model):
   flow = models.ForeignKey(Flow, related_name="orders")
   merchant = models.ForeignKey(User, related_name="orders")
-  order_code = models.CharField(max_length=40)
+  order_code = models.CharField(max_length=40, default='')
   current_stage = models.ForeignKey(Stage)
   cust_name = models.CharField(max_length=50)
   cust_phone = USPhoneNumberField()
-  cust_email = models.EmailField(max_length=254)
-  notes = models.CharField(max_length=300)
-  time_entered = models.DateTimeField()
-
+  cust_email = models.EmailField(max_length=254, default='')
+  notes = models.CharField(max_length=300, default='')
+  time_entered = models.DateTimeField(auto_now=True)
+  STATE_CHOICES = (
+    ('current', 'current'),
+    ('done', 'done'),
+    ('canceled', 'canceled'),
+  )
+  state = models.CharField(max_length = 10, choices = STATE_CHOICES, default='current')
 
 class BusinessProfile(models.Model):
   user = models.OneToOneField(User, primary_key=True)

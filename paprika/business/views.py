@@ -2,12 +2,22 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 
 @login_required(login_url='/')
-def orders(request):
+def orders(request, order_filter):
   if request.method == 'GET':
     from paprika.models import Order, BusinessProfile
+
+    # filtering through different order
+    orders = Order.objects.filter(merchant=request.user)
+    if order_filter == 'current':
+      orders = Order.objects.filter(merchant=request.user)
+    elif order_filter == 'done':
+      orders = Order.objects.filter(merchant=request.user)
+    elif order_filter == 'canceled':
+      orders = Order.objects.filter(merchant=request.user)
+
     orders = Order.objects.filter(merchant=request.user)
     return render_to_response('orders.html', {'user' : request.user, 'orders' : orders}, context_instance=RequestContext(request))
   elif request.method == 'POST':
@@ -17,6 +27,8 @@ def orders(request):
       return HttpResponse("not valid!" + request.POST.get('cust_name'))
     else:
       return HttpResponse('added order!') 
+  else:
+    return HttpResponseBadRequest()
 
 @login_required(login_url='/')
 def flows(request):
