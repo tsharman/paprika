@@ -9,16 +9,9 @@ def orders(request, order_filter):
   if request.method == 'GET':
     from paprika.models import Order, BusinessProfile
 
-    # filtering through different order
-    orders = Order.objects.filter(merchant=request.user)
-    if order_filter == 'current':
-      orders = Order.objects.filter(merchant=request.user)
-    elif order_filter == 'done':
-      orders = Order.objects.filter(merchant=request.user)
-    elif order_filter == 'canceled':
-      orders = Order.objects.filter(merchant=request.user)
+    # filtering through different order states
+    orders = Order.objects.filter(merchant=request.user, state=order_filter)
 
-    orders = Order.objects.filter(merchant=request.user)
     return render_to_response('orders.html', {'user' : request.user, 'orders' : orders}, context_instance=RequestContext(request))
   elif request.method == 'POST':
     from paprika.business.forms import OrderForm
