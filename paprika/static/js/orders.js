@@ -1,6 +1,6 @@
 $(document).ready(function() {
   //add order btn
-  $("#add_btn").click(function() {
+  $("#add_order_btn").click(function() {
     $("#dialogs").fadeIn(200, function() {
       $("#add_order_dialog").fadeIn(200);
     });
