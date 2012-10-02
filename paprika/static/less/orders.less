@@ -3,6 +3,7 @@
 @import "input.less";
 @import "buttons.less";
 @import "dialog.less";
+@import "stages.less";
 
 #left_box {
   display: inline-block;
@@ -68,42 +69,6 @@
       font-weight: 600;
       color: @paprika-pink;
     }
-
-.stages {
-  height: 100px;
-  margin-top: 10px;
-  overflow: auto;
-  background: #eee;
-}
-  .stages .stage {
-    height: 100%;
-    position: relative;
-    float: left;
-    color: #aaa;
-    text-align: center;
-    cursor: pointer;
-    display: table;
-  }
-    .stages .stage .start_here {
-      display: none;
-      line-height: 100px;
-    }
-    .stages .stage .status_bar {
-      position: absolute;
-      top: 0; left: 0;
-      background: #888;
-      height: 100%;
-      line-height: 100px;
-      color: #ddd;
-      font-size: 20px;
-      padding: 0px 5px;
-    }
-    .stages .stage h4 {
-      display: table-cell;
-      padding-left: 25px;
-      vertical-align: middle;
-    }
-
 
 #add_order_dialog {
 }
