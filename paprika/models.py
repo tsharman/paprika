@@ -6,12 +6,13 @@ from django.contrib import admin
 class Flow(models.Model):
   flow_name = models.CharField(max_length=100)
   owner = models.ForeignKey(User, related_name="flows")
+  def __unicode__(self):
+    return "Flow " + self.flow_name
 
 class Stage(models.Model):
   title = models.CharField(max_length=100)
   description = models.CharField(max_length=200)
   stage_num = models.IntegerField(default=1)
-  notes = models.CharField(max_length=300, default='')
   flow = models.ForeignKey(Flow, related_name="stages")
   def __unicode__(self):
     return "Stage " + self.title
@@ -32,11 +33,14 @@ class Order(models.Model):
     ('canceled', 'canceled'),
   )
   state = models.CharField(max_length = 10, choices = STATE_CHOICES, default='current')
+  def __unicode__(self):
+    return "Order " + self.order_code
 
 class BusinessProfile(models.Model):
   user = models.OneToOneField(User, primary_key=True)
   business_name = models.CharField(max_length=100, blank=False)
-
+  def __unicode__(self):
+    return business_name
 
 admin.site.register(Order)
 admin.site.register(Flow)
