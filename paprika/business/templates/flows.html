@@ -1,6 +1,18 @@
 {% extends "bu_base.html" %}
+
+{% block js %}
+  <script type="text/javascript" src="{{ STATIC_URL }}js/flows.js" />
+{% endblock %}
+
 {% block less %}
   <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/flows.less" />
+{% endblock %}
+
+{% block dialogs %}
+  <div id="add_flow_dialog" class="dialog">
+    <div class="close_dialog">x</div>
+    <h2 class="title">Add a Flow</h2>
+  </div>
 {% endblock %}
 
 {% block content %}
