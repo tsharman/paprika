@@ -14,9 +14,13 @@ class Stage(models.Model):
   notes = models.CharField(max_length=300, default='')
   flow = models.ForeignKey(Flow, related_name="stages")
 
+class BusinessProfile(models.Model):
+  user = models.OneToOneField(User, primary_key=True)
+  business_name = models.CharField(max_length=100, blank=False)
+
 class Order(models.Model):
   flow = models.ForeignKey(Flow, related_name="orders")
-  merchant = models.ForeignKey(User, related_name="orders")
+  merchant = models.ForeignKey(BusinessProfile, related_name="orders")
   order_code = models.CharField(max_length=40, default='')
   current_stage = models.ForeignKey(Stage)
   cust_name = models.CharField(max_length=50)
@@ -30,11 +34,6 @@ class Order(models.Model):
     ('canceled', 'canceled'),
   )
   state = models.CharField(max_length = 10, choices = STATE_CHOICES, default='current')
-
-class BusinessProfile(models.Model):
-  user = models.OneToOneField(User, primary_key=True)
-  business_name = models.CharField(max_length=100, blank=False)
-
 
 admin.site.register(Order)
 admin.site.register(Flow)
