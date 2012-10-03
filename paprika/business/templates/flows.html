@@ -12,6 +12,14 @@
   <div id="add_flow_dialog" class="dialog">
     <div class="close_dialog">x</div>
     <h2 class="title">Add a Flow</h2>
+    <input type="text" name="flow_name" id="flow_name" placeholder="Name your flow!" />
+    <div class="btn btn_green" id="add_stage_btn">+</div>
+    <div id="stage_form_list">
+      <div class="stage_form">
+        <input type="text" class="title" placeholder="Stage title" /><input type="text" class="description" placeholder="Stage Description"/>
+      </div>
+    </div>
+    <div class="btn btn_green" id="create_flow_btn">Create this Flow!</div>
   </div>
 {% endblock %}
 
