@@ -3,9 +3,13 @@ from django.contrib.auth.models import User
 from django.contrib.localflavor.us.forms import USPhoneNumberField
 from django.contrib import admin
 
+class BusinessProfile(models.Model):
+  user = models.OneToOneField(User, primary_key=True, related_name="business")
+  business_name = models.CharField(max_length=100, blank=False)
+
 class Flow(models.Model):
   flow_name = models.CharField(max_length=100)
-  owner = models.ForeignKey(User, related_name="flows")
+  owner = models.ForeignKey(BusinessProfile, related_name="flows")
 
 class Stage(models.Model):
   title = models.CharField(max_length=100)
@@ -13,10 +17,6 @@ class Stage(models.Model):
   stage_num = models.IntegerField(default=1)
   notes = models.CharField(max_length=300, default='')
   flow = models.ForeignKey(Flow, related_name="stages")
-
-class BusinessProfile(models.Model):
-  user = models.OneToOneField(User, primary_key=True)
-  business_name = models.CharField(max_length=100, blank=False)
 
 class Order(models.Model):
   flow = models.ForeignKey(Flow, related_name="orders")

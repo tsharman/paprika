@@ -10,7 +10,8 @@ def orders(request, order_state):
     from paprika.models import Order, BusinessProfile
 
     # filtering through different order states
-    orders = Order.objects.filter(merchant=request.user, state=order_state)
+    orders = Order.objects.filter(merchant=request.user.business, state=order_state)
+    
 
     return render_to_response('orders.html', {'user' : request.user, 'orders' : orders}, context_instance=RequestContext(request))
   elif request.method == 'POST':

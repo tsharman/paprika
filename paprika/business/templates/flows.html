@@ -26,7 +26,7 @@
 {% block content %}
 <a href="#" id="add_flow_btn" class="btn">+ Create a flow</a>
 <div id="flow_list">
-  {% for flow in user.flows.all %}
+  {% for flow in user.business.flows.all %}
     <div class="flow">
       <h1>{{ flow.flow_name }}</h1>
       <div class="edit_flow">EDIT</div>
