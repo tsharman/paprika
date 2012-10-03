@@ -21,8 +21,15 @@ $(document).ready(function() {
  
     stage_form.append("<input type='text' class='title' placeholder='Stage title' />"); 
     stage_form.append("<input type='text' class='description' placeholder='Stage description' />");
-    
+    stage_form.append("<div class='btn btn_red remove_stage'>x</div>"); 
+   
     container.append(stage_form);
+  });
+  
+  // remove stage
+  $(".remove_stage").live('click', function() {
+    var stage_form = $(this).parent();
+    stage_form.remove();
   });
 
 });
