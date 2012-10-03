@@ -19,7 +19,7 @@ def orders(request, order_state):
     if not order.is_valid():
       return HttpResponse("not valid!" + request.POST.get('cust_name'))
     else:
-      return HttpResponse('added order!') 
+      return HttpResponse('added order!')
   else:
     return HttpResponseBadRequest()
 
@@ -29,4 +29,4 @@ def flows(request):
 
 @login_required(login_url='/')
 def account(request):
-  return render(request, 'account.html') 
+  return render(request, 'account.html')
