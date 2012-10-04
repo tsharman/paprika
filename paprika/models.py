@@ -10,6 +10,8 @@ class BusinessProfile(models.Model):
 class Flow(models.Model):
   flow_name = models.CharField(max_length=100)
   owner = models.ForeignKey(BusinessProfile, related_name="flows")
+  def sorted_stages(self):
+    return self.stages.order_by('stage_num')
 
 class Stage(models.Model):
   title = models.CharField(max_length=100)
