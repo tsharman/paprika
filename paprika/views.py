@@ -39,7 +39,7 @@ def signin(request):
 
 def signout(request):
   logout(request)
-  return HttpResponse('logged out!')
+  return HttpResponseRedirect('/')
 
 @login_required(login_url='/')
 def orders(request):
