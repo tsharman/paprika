@@ -9,8 +9,7 @@ from paprika.models import Order, BusinessProfile
 def orders(request, order_state):
   if request.method == 'GET':
     # filtering through different order states
-    orders = Order.objects.filter(merchant=request.user.business, state=order_state)
-    
+    orders = Order.objects.filter(merchant=request.user, state=order_state)
 
     return render_to_response('orders.html', {'user' : request.user, 'orders' : orders}, context_instance=RequestContext(request))
   elif request.method == 'POST':
@@ -29,14 +28,28 @@ def flows(request):
 
 @login_required(login_url='/')
 def account(request):		
-	return render_to_response(request, 'account.html');
+	if request.method == 'GET':
+		return render_to_response('account.html', {'user' : request.user}, context_instance=RequestContext(request))
+	elif request.method == 'POST':
+		user = request.user
+		
+		#get post data
+		business_name = request.POST.get('business_name')
+		user_name = request.POST.get('user_name')
+		email = request.POST.get('email')
+		new_password = request.POST.get('new_password')
+		
+		#update models
+		user.business.business_name = business_name
+		user.username = user_name
+		user.email = email
+		if new_password != "": #lame, will be better than this
+			user.set_password(new_password); 
+		
+		#save business profile
+		user.save()
+		user.business.save()
+		
+		#refresh page
+		return render_to_response('account.html', {'user' : request.user}, context_instance=RequestContext(request))
 
-#	if request.method == 'GET':
-#		#look up buisness name
-#		business_profile = BusinessProfile.objects.get(user=request.user);
-#		buisnes_name = business_profile.business_name	
-#		return render_to_response(request, 'account.html', {'buisnes_name' : buisnes_name}) #  # context_instance?
-#  elif request.method == 'POST':
-#      return HttpResponse('account view recieved a POST request')
-#	else:
-#    return HttpResponseBadRequest()

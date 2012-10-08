@@ -5,10 +5,22 @@
 {% block content %}
 <h1>Account Setup Page</h1>
 
-<form method="post">
-	<p>
-		Your current buisness name is:  
-		<input type="text" name="buisness_name" value="current name"/>
+<form action="/bu/account/" method="post">
+	{% csrf_token %}
+		
+		Business Name:  
+		<input type="text" name="business_name" value="{{user.business.business_name}}"/><p/>
+		
+		User Name:  
+		<input type="text" name="user_name" value="{{user.username}}"/><p/>
+		
+		Email:  
+		<input type="text" name="email" value="{{user.email}}"/><p/>
+		
+		New Password:  
+		<input type="text" name="new_password" value="" placeholder="leave blank to not change"/><p/>
+		
+		<input type="submit" class="btn" value="SAVE" /><p/>
 	</p>
 </form>
 

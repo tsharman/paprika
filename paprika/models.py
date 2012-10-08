@@ -22,7 +22,7 @@ class Stage(models.Model):
   stage_num = models.IntegerField(default=1)
   flow = models.ForeignKey(Flow, related_name="stages")
   def __unicode__(self):
-    return "Stage " + self.title
+    return self.title
 
 class Order(models.Model):
   flow = models.ForeignKey(Flow, related_name="orders")
