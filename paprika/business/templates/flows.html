@@ -34,7 +34,7 @@
       <div class="edit_flow">EDIT</div>
       <div class="stages">
       {% for stage in flow.stages.all %}
-        <div class="stage" style='width: {% widthratio 790 flow.stages.count 1 %};'>
+        <div class="stage" style='width: {% widthratio 790 flow.stages.count 1 %}px;'>
           <div class="status_bar">{{ forloop.counter }}</div>
           <h4 class="start_here">Start here.</h4>
           <h4 class="stage_title">{{ stage.title }}</h4>
