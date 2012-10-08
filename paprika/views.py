@@ -18,6 +18,8 @@ def signup(request):
       business_prof = BusinessProfile(user=new_user, business_name=form.cleaned_data['business_name'])
       business_prof.save()
       return signin(request)
+    else:
+      return HttpResponseRedirect('/')
   else:
     return render(request, 'signup.html')
 
@@ -39,7 +41,7 @@ def signin(request):
 
 def signout(request):
   logout(request)
-  return HttpResponse('logged out!')
+  return HttpResponseRedirect('/')
 
 @login_required(login_url='/')
 def orders(request):

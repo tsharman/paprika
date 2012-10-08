@@ -1,10 +1,10 @@
-# Create your views here.
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from paprika.models import Order, BusinessProfile
 from paprika.business.forms import OrderForm
+from django.contrib.auth.models import User
 
 @login_required(login_url='/')
 def orders(request, order_state):
@@ -34,4 +34,28 @@ def flows(request):
 
 @login_required(login_url='/')
 def account(request):
-  return render(request, 'account.html')
+	if request.method == 'GET':
+		return render_to_response('account.html', {'user' : request.user}, context_instance=RequestContext(request))
+	elif request.method == 'POST':
+		user = request.user
+
+		#get post data
+		business_name = request.POST.get('business_name')
+		user_name = request.POST.get('user_name')
+		email = request.POST.get('email')
+		new_password = request.POST.get('new_password')
+
+		#update models
+		user.business.business_name = business_name
+		user.username = user_name
+		user.email = email
+		if new_password != "": #lame, will be better than this
+			user.set_password(new_password);
+
+		#save business profile
+		user.save()
+		user.business.save()
+
+		#refresh page
+		return render_to_response('account.html', {'user' : request.user}, context_instance=RequestContext(request))
+
