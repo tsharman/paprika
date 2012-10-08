@@ -24,8 +24,7 @@ def orders(request, order_state):
       order.merchant = BusinessProfile.objects.get(user=request.user)
       order.current_stage = order.flow.stages.get(stage_num=1)
       order.save()
-      their_orders = Order.objects.filter(merchant=request.user, state=order_state)
-      return render_to_response('orders.html', {'user' : request.user, 'orders' : their_orders}, context_instance=RequestContext(request))
+      return HttpResponseRedirect('/bu/orders/')
   else:
     return HttpResponseBadRequest()
 
