@@ -5,3 +5,4 @@ class OrderForm(ModelForm):
   class Meta:
     model = Order
     exclude = ('merchant', 'notes', 'current_stage', 'state',)
+
