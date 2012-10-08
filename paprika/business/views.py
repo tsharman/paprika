@@ -1,14 +1,13 @@
-# Create your views here.
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
+from django.contrib.auth.models import User
+from paprika.models import Order, BusinessProfile
 
 @login_required(login_url='/')
 def orders(request, order_state):
   if request.method == 'GET':
-    from paprika.models import Order, BusinessProfile
-
     # filtering through different order states
     orders = Order.objects.filter(merchant=request.user, state=order_state)
 
@@ -28,5 +27,15 @@ def flows(request):
   return render(request, 'flows.html')
 
 @login_required(login_url='/')
-def account(request):
-  return render(request, 'account.html')
+def account(request):		
+	return render_to_response(request, 'account.html');
+
+#	if request.method == 'GET':
+#		#look up buisness name
+#		business_profile = BusinessProfile.objects.get(user=request.user);
+#		buisnes_name = business_profile.business_name	
+#		return render_to_response(request, 'account.html', {'buisnes_name' : buisnes_name}) #  # context_instance?
+#  elif request.method == 'POST':
+#      return HttpResponse('account view recieved a POST request')
+#	else:
+#    return HttpResponseBadRequest()

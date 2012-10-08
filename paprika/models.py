@@ -40,7 +40,7 @@ class BusinessProfile(models.Model):
   user = models.OneToOneField(User, primary_key=True)
   business_name = models.CharField(max_length=100, blank=False)
   def __unicode__(self):
-    return business_name
+    return self.business_name
 
 admin.site.register(Order)
 admin.site.register(Flow)
