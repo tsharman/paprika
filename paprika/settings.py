@@ -136,7 +136,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'paprika',
     'south',
-    'tastypie',
     'compressor',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
