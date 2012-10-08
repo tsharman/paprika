@@ -20,13 +20,13 @@
         <input type="text" name="cust_email" placeholder="Email address" />
       </p>
       <select name="flow">
-        {% for flow in user.flows.all %}
+        {% for flow in user.business.flows.all %}
           <option value={{ flow.id }}>{{ flow.flow_name }}</option>
         {% endfor %}
       </select>
       <input type="text" name="order_code" placeholder="Order code"/>
       <input type="hidden" value="1" />
-      <input type="submit" class="btn" value="Add Order" />
+      <input type="submit" class="btn btn_green" value="Add Order" />
     </form>
   </div>
 {% endblock %}
@@ -46,7 +46,7 @@
         <h2 class="customer">{{ order.cust_name }}</h3>
         <h3 class="customer_email">{{ order.cust_email }}</h3>
         <div class="stages">
-          {% for stage in order.flow.stages.all %}
+          {% for stage in order.flow.sorted_stages %}
             <div class="stage" style='width: {% widthratio 673 order.flow.stages.count 1 %};'>
               <div class="status_bar">{{ forloop.counter }}</div>
               <h4 class="start_here">Start here.</h4>

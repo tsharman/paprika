@@ -3,9 +3,16 @@ from django.contrib.auth.models import User
 from django.contrib.localflavor.us.forms import USPhoneNumberField
 from django.contrib import admin
 
+class BusinessProfile(models.Model):
+  user = models.OneToOneField(User, primary_key=True, related_name="business")
+  business_name = models.CharField(max_length=100, blank=False)
+
 class Flow(models.Model):
   flow_name = models.CharField(max_length=100)
-  owner = models.ForeignKey(User, related_name="flows")
+  owner = models.ForeignKey(BusinessProfile, related_name="flows")
+  def sorted_stages(self):
+    return self.stages.order_by('stage_num')
+		
   def __unicode__(self):
     return "Flow " + self.flow_name
 
@@ -19,7 +26,7 @@ class Stage(models.Model):
 
 class Order(models.Model):
   flow = models.ForeignKey(Flow, related_name="orders")
-  merchant = models.ForeignKey(User, related_name="orders")
+  merchant = models.ForeignKey(BusinessProfile, related_name="orders")
   order_code = models.CharField(max_length=40, default='')
   current_stage = models.ForeignKey(Stage)
   cust_name = models.CharField(max_length=50)
@@ -41,7 +48,7 @@ class BusinessProfile(models.Model):
   business_name = models.CharField(max_length=100, blank=False)
   def __unicode__(self):
     return self.business_name
-
+		
 admin.site.register(Order)
 admin.site.register(Flow)
 admin.site.register(Stage)
