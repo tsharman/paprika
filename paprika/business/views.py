@@ -46,10 +46,10 @@ def account(request):
 		if new_password != "": #lame, will be better than this
 			user.set_password(new_password); 
 		
-		#save business profile
+		#save models
 		user.save()
 		user.business.save()
 		
-		#refresh page
+		#refresh
 		return render_to_response('account.html', {'user' : request.user}, context_instance=RequestContext(request))
 
