@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
-from paprika.models import Order, BusinessProfile
+from paprika.models import Flow, Stage, Order, BusinessProfile
 from paprika.business.forms import OrderForm
 from django.contrib.auth.models import User
 
@@ -30,7 +30,22 @@ def orders(request, order_state):
 
 @login_required(login_url='/')
 def flows(request):
-  return render(request, 'flows.html')
+  if request.method == 'GET':
+    return render(request, 'flows.html')
+  elif request.method == 'POST':
+    flow_name = request.POST.get('flow_name')
+    stage_titles = request.POST.getlist('stage_titles')
+    stage_descriptions = request.POST.getlist('stage_descriptions')
+    
+    flow = Flow(flow_name = flow_name, owner = request.user.business)  
+    flow.save()  
+
+    for (counter, stage) in enumerate(stage_titles):
+      new_stage = Stage(title = stage_titles[counter], description = stage_descriptions[counter], stage_num = (counter + 1), flow = flow)
+      new_stage.save()
+      
+      
+    return HttpResponseRedirect("/bu/flows/")
 
 @login_required(login_url='/')
 def account(request):

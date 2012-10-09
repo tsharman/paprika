@@ -21,6 +21,7 @@ class Stage(models.Model):
   description = models.CharField(max_length=200)
   stage_num = models.IntegerField(default=1)
   flow = models.ForeignKey(Flow, related_name="stages")
+  notes = models.CharField(max_length=300, blank=True)
   def __unicode__(self):
     return self.title
 
