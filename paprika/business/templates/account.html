@@ -1,28 +1,36 @@
 {% extends "bu_base.html" %}
 {% block less %}
+  <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/account.less" />
 {% endblock %}
 
 {% block content %}
-<h1>Account Setup Page</h1>
 
-<form action="/bu/account/" method="post">
+<div id="account_container">
+<form action="/bu/account/" method="post" id="account_form">
 	{% csrf_token %}
 		
-		Business Name:  
-		<input type="text" name="business_name" value="{{user.business.business_name}}"/><p/>
-		
-		User Name:  
-		<input type="text" name="user_name" value="{{user.username}}"/><p/>
-		
-		Email:  
-		<input type="text" name="email" value="{{user.email}}"/><p/>
-		
-		New Password:  
-		<input type="text" name="new_password" value="" placeholder="leave blank to not change"/><p/>
-		
-		<input type="submit" class="btn" value="SAVE" /><p/>
+		<div class="form_group">
+      <h4>Business Name</h4> 
+		  <input type="text" name="business_name" value="{{user.business.business_name}}"/>	  
+    </div>
+    <div class="form_group">	
+		  <h4>User Name</h4>  
+		  <input type="text" name="user_name" value="{{user.username}}"/>
+    </div>
+
+    <div class="form_group whole">
+		  <h4>Email</h4>  
+		  <input type="text" name="email" value="{{user.email}}"/>
+    </div>
+      
+    <div class="form_group whole">
+		  <h4>New Password:</h4>  
+		  <input type="text" name="new_password" value="" placeholder="leave blank to not change"/>
+    </div>
+    
+		<input type="submit" class="btn btn_green" value="SAVE" />
 	</p>
 </form>
-
+</div>
 {% endblock %}
 
