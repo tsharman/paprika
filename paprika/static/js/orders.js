@@ -15,12 +15,16 @@ $(document).ready(function() {
 
   //hover over stages
   $(".stage").hover(function() {
-    $(this).children(".status_bar").css("background-color", "#54c56f");
-    $(this).children(".stage_title").hide();
-    $(this).children(".start_here").show();
+    if(!$(this).children('.status_bar').hasClass('active')) {
+      $(this).children(".status_bar").css("background-color", "#ff835d");
+      $(this).children(".stage_title").hide();
+      $(this).children(".start_here").show();
+    }
   }, function() {
-    $(this).children(".status_bar").css("background-color", "#888");
-    $(this).children(".start_here").hide();
-    $(this).children(".stage_title").show();
+    if(!$(this).children('.status_bar').hasClass('active')) {
+      $(this).children(".status_bar").css("background-color", "#888");
+      $(this).children(".start_here").hide();
+      $(this).children(".stage_title").show();
+    }
   });
 });

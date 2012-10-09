@@ -19,8 +19,8 @@ $(document).ready(function() {
 
     var stage_form = $("<div class='stage_form'></div>");
  
-    stage_form.append("<input type='text' class='title' placeholder='Stage title' />"); 
-    stage_form.append("<input type='text' class='description' placeholder='Stage description' />");
+    stage_form.append("<input type='text' class='title' name='stage_titles' placeholder='Stage title' />"); 
+    stage_form.append("<input type='text' class='description' name='stage_descriptions' placeholder='Stage description' />");
     stage_form.append("<div class='btn btn_red remove_stage'>x</div>"); 
    
     container.append(stage_form);

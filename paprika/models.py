@@ -21,6 +21,7 @@ class Stage(models.Model):
   description = models.CharField(max_length=200)
   stage_num = models.IntegerField(default=1)
   flow = models.ForeignKey(Flow, related_name="stages")
+  notes = models.CharField(max_length=300, blank=True)
   def __unicode__(self):
     return self.title
 
@@ -32,7 +33,7 @@ class Order(models.Model):
   cust_name = models.CharField(max_length=50)
   cust_phone = USPhoneNumberField()
   cust_email = models.EmailField(max_length=254, default='')
-  notes = models.CharField(max_length=300, default='')
+  notes = models.CharField(max_length=300, default='', blank=True)
   time_entered = models.DateTimeField(auto_now=True)
   STATE_CHOICES = (
     ('current', 'current'),

@@ -1,4 +1,5 @@
 {% load compress %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
   <title>Paprika | {{ user.business.business_name }}</title>
@@ -21,9 +22,10 @@
 </div>
 <div id="container">
   <div id="heading">
-    <h2>Paprika | {{ user.business.business_name }}</h2>
+    <h2>Paprika</h2>
+    <h3 id="welcome">Welcome {{ user.business.business_name }}!</h3>
     <div id="nav">
-      <a href="/bu/orders/">Orders</a>
+      <a href="/bu/orders/" {% if order_state = 'current' %}class="active"{% endif %}>Orders</a>
       <a href="/bu/flows/">Flows</a>
       <a href="/bu/account/">Account</a>
       <a href="/logout/" class="right">Sign Out</a>
