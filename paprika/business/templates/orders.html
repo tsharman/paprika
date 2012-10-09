@@ -31,6 +31,8 @@
   </div>
 {% endblock %}
 
+
+
 {% block content %}
 <div id="left_box">
   <div id="sub_nav">
@@ -40,11 +42,15 @@
   </div>
 </div><div id="right_box">
   <a href="#" id="add_order_btn" class="btn">+ Add an order</a>
+  
   <div id="order_list">
+    
     {% for order in orders %}
       <div class="order">
         <h2 class="customer">{{ order.cust_name }}</h3>
         <h3 class="customer_email">{{ order.cust_email }}</h3>
+        <h3 class="time_entered">{{ order.time_entered }}</h3>  
+
         <div class="stages">
           {% for stage in order.flow.sorted_stages %}
             <div class="stage" style='width: {% widthratio 673 order.flow.stages.count 1 %}px;'>
@@ -59,9 +65,14 @@
             </div>
           {% endfor %}
         </div>
+      
       </div>
     {% endfor %}
+  
   </div>
+
+
+
 </div>
 
 {% endblock %}
