@@ -22,7 +22,8 @@
 </div>
 <div id="container">
   <div id="heading">
-    <h2>Paprika | {{ user.business.business_name }}</h2>
+    <h2>Paprika</h2>
+    <h3 id="welcome">Welcome {{ user.business.business_name }}!</h3>
     <div id="nav">
       <a href="/bu/orders/" {% if order_state = 'current' %}class="active"{% endif %}>Orders</a>
       <a href="/bu/flows/">Flows</a>
