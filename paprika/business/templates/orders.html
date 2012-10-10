@@ -41,25 +41,29 @@
     <a href="/bu/orders/canceled/">Canceled</a>
   </div>
 </div><div id="right_box">
-  <a href="#" id="add_order_btn" class="btn">+ Add an order</a>
-  
+  <div id="add_order_btn" class="btn btn_green">+ Add an order</div>
+  <div id="collapse_btn" class="btn btn_grey">collapse</div> 
   <div id="order_list">
     
     {% for order in orders %}
-      <div class="order">
+      <div class="order" data-orderid={{ order.id }}>
+        <div class="order_actions">
+          <div class="btn btn_grey">Edit</div><div class="btn btn_red">Delete</div>
+        </div>
         <h2 class="customer">{{ order.cust_name }}</h3>
         <h3 class="customer_email">{{ order.cust_email }}</h3>
         <h3 class="time_entered">{{ order.time_entered }}</h3>  
 
         <div class="stages">
           {% for stage in order.flow.sorted_stages %}
-            <div class="stage" style='width: {% widthratio 673 order.flow.stages.count 1 %}px;'>
-              <div 
-                {% if stage == order.current_stage %} 
-                  {{ 'class="status_bar active"' }} 
-                {% else %} 
-                  {{ 'class="status_bar"' }} 
-                {% endif %}>{{ forloop.counter }}</div>
+            <div
+              {% if stage == order.current_stage %}
+                class="stage active"
+              {% else %}
+                class="stage"
+              {% endif %}
+              data-stageid={{ stage.id }} style='width: {% widthratio 673 order.flow.stages.count 1 %}px;'>
+              <div class="status_bar">{{ forloop.counter }}</div>
               <h4 class="start_here">Move here.</h4>
               <h4 class="stage_title">{{ stage.title }}</h4>
             </div>

@@ -27,15 +27,29 @@
       <input type="submit" class="btn btn_green" id="create_flow_btn" value="Create this flow!" />
     </form>  
   </div>
+
+  <div id="edit_flow_dialog" class="dialog">
+    <div class="close_dialog">x</div>
+    <h2 class="title">Edit your Flow</h2>
+    
+    <form action="/bu/flows/edit/" method="POST">
+      {% csrf_token %}
+      <input type="text" name="flow_name" id="flow_name" />
+      
+    </form>
+  </div>
+
 {% endblock %}
 
 {% block content %}
-<a href="#" id="add_flow_btn" class="btn">+ Create a flow</a>
+<div id="add_flow_btn" class="btn btn_green">+ Create a flow</div>
 <div id="flow_list">
   {% for flow in user.business.flows.all %}
     <div class="flow">
       <h1>{{ flow.flow_name }}</h1>
-      <div class="edit_flow">EDIT</div>
+      <div class="flow_actions">
+        <div class="btn btn_grey">EDIT</div><div class="btn btn_red">DELETE</div>
+      </div>
       <div class="stages">
       {% for stage in flow.stages.all %}
         <div class="stage" style='width: {% widthratio 790 flow.stages.count 1 %}px;'>

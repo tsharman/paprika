@@ -33,16 +33,16 @@
     }
 
 #add_order_btn {
-  color: #eee;
   position: absolute;
   right: 0;
-  background: @paprika-green;
 }
   #add_btn:hover {
     background: #f3e2e2;
     color: @paprika-pink;
   }
 
+#collapse_btn {
+}
 
 #order_list {
   margin-top: 50px;
@@ -59,6 +59,11 @@
     box-shadow: 0px 0px 2px 2px #ccc;
     word-wrap: break-word;
   }
+    #order_list .order .order_actions {
+      position: absolute;
+      right: 0px;
+      top:0px;
+    }
     #order_list .order .customer {
       font-size: 20px;
       font-weight: 600;
@@ -72,7 +77,7 @@
     }
     #order_list .order .time_entered {
       position: absolute;
-      top: 10px;
+      top: 35px;
       right: 10px;
       font-size: 15px;
       color: #aaa;

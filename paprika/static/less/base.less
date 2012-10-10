@@ -9,12 +9,22 @@
 #heading {
   position: relative;
 }
-  #heading h2 {
-    color: @paprika-pink;
-    display: inline-block;
-    margin-bottom: 20px;
-    font-weight: 500;
+  #heading #paprika_logo {
   }
+    #heading #paprika_logo img {
+      border-radius: 25px;
+      background: #ff835d;
+      padding: 5px;
+      width: 40px;
+      vertical-align: middle;
+      margin-bottom: 10px;
+      margin-right: 10px;
+    }
+    #heading #paprika_logo h2 {
+      color: @paprika-pink;
+      display: inline-block;
+      font-weight: 700;
+    }
   #heading #welcome {
     position: absolute;
     right: 0px;
@@ -22,9 +32,10 @@
     color: #666;
   }
   #heading #nav {
-    margin-top: 5px;
+    margin-top: 30px;
   }
     #heading #nav a {
+      font-weight: 600;
       font-size: 13px;
       margin-right: 20px;
       color: #999;
