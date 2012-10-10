@@ -4,12 +4,16 @@ from django.contrib.localflavor.us.models import PhoneNumberField
 from django.contrib import admin
 
 class BusinessProfile(models.Model):
-  user = models.OneToOneField(User, primary_key=True, related_name="business")
+  user = models.OneToOneField(User, primary_key=True, related_name='business')
   business_name = models.CharField(max_length=100, blank=False)
+  deleted = models.BooleanField(default=False)
+  def __unicode__(self):
+    return self.business_name
 
 class Flow(models.Model):
   flow_name = models.CharField(max_length=100)
   owner = models.ForeignKey(BusinessProfile, related_name="flows")
+  deleted = models.BooleanField(default=False)
   def sorted_stages(self):
     return self.stages.order_by('stage_num')
 
@@ -22,6 +26,7 @@ class Stage(models.Model):
   stage_num = models.IntegerField(default=1)
   flow = models.ForeignKey(Flow, related_name="stages")
   notes = models.CharField(max_length=300, blank=True)
+  deleted = models.BooleanField(default=False)
   def __unicode__(self):
     return self.title
 
@@ -44,11 +49,6 @@ class Order(models.Model):
   def __unicode__(self):
     return "Order " + self.order_code
 
-class BusinessProfile(models.Model):
-  user = models.OneToOneField(User, primary_key=True)
-  business_name = models.CharField(max_length=100, blank=False)
-  def __unicode__(self):
-    return self.business_name
 
 admin.site.register(Order)
 admin.site.register(Flow)

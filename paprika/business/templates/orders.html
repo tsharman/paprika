@@ -47,6 +47,9 @@
     
     {% for order in orders %}
       <div class="order" data-orderid={{ order.id }}>
+        <div class="order_actions">
+          <div class="btn btn_grey">Edit</div><div class="btn btn_red">Delete</div>
+        </div>
         <h2 class="customer">{{ order.cust_name }}</h3>
         <h3 class="customer_email">{{ order.cust_email }}</h3>
         <h3 class="time_entered">{{ order.time_entered }}</h3>  
