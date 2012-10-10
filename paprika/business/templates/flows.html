@@ -42,7 +42,7 @@
 {% endblock %}
 
 {% block content %}
-<a href="#" id="add_flow_btn" class="btn">+ Create a flow</a>
+<div id="add_flow_btn" class="btn btn_green">+ Create a flow</div>
 <div id="flow_list">
   {% for flow in user.business.flows.all %}
     <div class="flow">
