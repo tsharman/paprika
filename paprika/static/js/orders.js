@@ -10,6 +10,12 @@ $(document).ready(function() {
     }
   });
 
+  $(".order").click(function() {
+    if($(this).children(".stages").is(":hidden")) {
+      $(this).children(".stages").slideDown(200);
+    }
+  });
+
   //add order btn
   $("#add_order_btn").click(function() {
     $("#dialogs").fadeIn(200, function() {
