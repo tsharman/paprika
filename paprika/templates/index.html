@@ -7,9 +7,22 @@
   {% compress css %}
   <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/index.less" />
   {% endcompress %}
-  <meta property="og:title" name="title" content="Paprika" />
-<meta property="og:description" name="description" content="Friendly custom order tracking for businesses." />
-<meta property="og:image" content="thumbnail_image" />
+  <meta name="title" content="Paprika" />
+  <meta name="description" content="Friendly custom order tracking for businesses." />
+  <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-35379958-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+
 
 </head>
 <body>
