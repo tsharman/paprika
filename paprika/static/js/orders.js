@@ -14,6 +14,12 @@ $(document).ready(function() {
     if($(this).children(".stages").is(":hidden")) {
       $(this).children(".stages").slideDown(200);
     }
+    else {
+      $(this).children(".stages").slideUp(200);
+    }
+  });
+  $(".stages").click(function(e) {
+    e.stopPropagation();
   });
 
   //add order btn
