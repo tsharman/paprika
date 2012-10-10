@@ -1,4 +1,15 @@
 $(document).ready(function() {
+  $("#collapse_btn").click(function() {
+    if($(".stages").is(":visible")) {
+      $(".stages").slideUp(200);
+      $(this).text("Expand");
+    }
+    else {
+      $(".stages").slideDown(200);
+      $(this).text("Collapse");
+    }
+  });
+
   //add order btn
   $("#add_order_btn").click(function() {
     $("#dialogs").fadeIn(200, function() {
