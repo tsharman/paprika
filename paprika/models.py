@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.localflavor.us.forms import USPhoneNumberField
+from django.contrib.localflavor.us.models import PhoneNumberField
 from django.contrib import admin
 
 class BusinessProfile(models.Model):
@@ -12,7 +12,7 @@ class Flow(models.Model):
   owner = models.ForeignKey(BusinessProfile, related_name="flows")
   def sorted_stages(self):
     return self.stages.order_by('stage_num')
-		
+
   def __unicode__(self):
     return "Flow " + self.flow_name
 
@@ -31,7 +31,7 @@ class Order(models.Model):
   order_code = models.CharField(max_length=40, default='')
   current_stage = models.ForeignKey(Stage)
   cust_name = models.CharField(max_length=50)
-  cust_phone = USPhoneNumberField()
+  cust_phone = PhoneNumberField(default='0000000000')
   cust_email = models.EmailField(max_length=254, default='')
   notes = models.CharField(max_length=300, default='', blank=True)
   time_entered = models.DateTimeField(auto_now_add=True)
@@ -49,7 +49,7 @@ class BusinessProfile(models.Model):
   business_name = models.CharField(max_length=100, blank=False)
   def __unicode__(self):
     return self.business_name
-		
+
 admin.site.register(Order)
 admin.site.register(Flow)
 admin.site.register(Stage)
