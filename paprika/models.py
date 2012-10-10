@@ -34,7 +34,7 @@ class Order(models.Model):
   cust_phone = USPhoneNumberField()
   cust_email = models.EmailField(max_length=254, default='')
   notes = models.CharField(max_length=300, default='', blank=True)
-  time_entered = models.DateTimeField(auto_now=True)
+  time_entered = models.DateTimeField(auto_now_add=True)
   STATE_CHOICES = (
     ('current', 'current'),
     ('done', 'done'),
