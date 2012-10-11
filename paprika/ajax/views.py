@@ -3,7 +3,7 @@ from paprika.models import Order, Flow
 
 def move_stage(request):
   if request.method == 'POST':
-    new_stage_index = request.POST.get('stage_index')  
+    new_stage_index = request.POST.get('stage_index')
     order_id = request.POST.get('order_id')
 
     order = Order.objects.get(id = order_id)
@@ -20,6 +20,16 @@ def delete_flow(request):
     flow = Flow.objects.get(id = flow_id)
     flow.deleted = True
     flow.save()
-    return HttpResponse(flow.flow_name);
+    return HttpResponse();
+  else:
+    return HttpResponseBadRequest();
+
+def delete_order(request):
+  if request.method == 'POST':
+    order_id = request.POST.get('order_id');
+    order = Order.objects.get(id = order_id)
+    order.state = 'canceled'
+    order.save()
+    return HttpResponse();
   else:
     return HttpResponseBadRequest();
