@@ -52,8 +52,8 @@
 {% block content %}
 <div id="add_flow_btn" class="btn btn_green">+ Create a flow</div>
 <div id="flow_list">
-  {% for flow in user.business.flows.all %}
-    <div class="flow">
+  {% for flow in flows %}
+    <div class="flow" data-flowid={{ flow.id }}>
       <h1>{{ flow.flow_name }}</h1>
       <div class="flow_actions">
         <div class="edit_btn btn btn_grey">EDIT</div><div class="delete_btn btn btn_red">DELETE</div>
