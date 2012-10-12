@@ -30,7 +30,7 @@ $(document).ready(function() {
   });
 
   //close the dialog
-  $(".close_dialog").click(function() {
+  $(".close_dialog, .close").click(function() {
     $(this).parent().fadeOut(200, function() {
       $("#dialogs").fadeOut(200);
     });
@@ -88,6 +88,43 @@ $(document).ready(function() {
         }
       });
     }
+  });
+  
+  $(".delete_btn").click(function(e) {
+    e.stopPropagation();
+    currentFlow = $(this).parent().parent();
+    $("#dialogs").fadeIn(200, function() {
+      $("#delete_order_dialog").fadeIn(200);
+    });
+  });
+
+  // yes delete buttn
+  $("#yes_delete_btn").click(function() {
+    orderId = $(currentFlow).attr("data-orderid");
+    $.ajax({
+      beforeSend : function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      },
+      type : "POST",
+      url : "/ajax/delete_order/",
+      data : {
+        "order_id" : orderId
+      },
+      async: true,
+      success : function(response) {
+        console.log(response);
+      },
+      error : function(response) {
+        console.log(response);
+      }
+    });
+
+    $("#delete_order_dialog").fadeOut(200, function() {
+      $("#dialogs").fadeOut(200);
+    });
+    
+    $(currentFlow).delay(400).slideUp(200);
+
   });
 
 });
