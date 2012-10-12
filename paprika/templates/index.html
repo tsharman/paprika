@@ -4,6 +4,7 @@
 <head>
   <title>Paprika</title>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> 
+  <script src="{{ STATIC_URL }}js/index.js"></script>
   {% compress css %}
   <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/index.less" />
   {% endcompress %}
@@ -26,12 +27,26 @@
 
 </head>
 <body>
+  <div id="dialogs">
+    <div class="dialog" id="sign_up_dialog">
+      <div class="close_dialog">x</div>
+      <h1>Sign up</h1>
+      <form method="POST" action="/signup/" id="signup">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username"/>
+        <input type="text" name="email" placeholder="Email"/>
+        <input type="password" name="password" placeholder="Password" />
+        <input type="text" name="business_name" placeholder="Business Name"/>
+        <input class="btn btn_green" type="submit" value="Login" /> 
+      </form>
+    </div>
+  </div>
   <div id="container">
     <img src="{{ STATIC_URL }}img/logo.png" />
     <h1>Paprika</h1>
     <p>A friendly order tracking tool.</p>
     <p>Made with &hearts; in Ann Arbor.</p> 
-    <a href="/signup" id="sign_up_btn" class="btn btn_pink" > Sign up! </a>
+    <div id="sign_up_btn" class="btn btn_pink" > Sign up! </div>
     <div id="login_container">
       <form method="POST" action="/login/">
         {% csrf_token %}
