@@ -77,6 +77,23 @@
           {% endfor %}
         </div>
       
+        <div class="state_bar">
+          <div 
+            {% if order.state == "current" %}
+              class = "btn btn_yellow"
+            {% elif order.state == "done" %}
+              class = "btn btn_green"
+            {% else %}
+              class  = "btn btn_red"
+            {% endif %}    
+          >{{ order.state }}</div>
+          <div class="state_options">
+            <div class="btn btn_yellow">Current</div>
+            <div class="btn btn_green">Done</div>
+            <div class="btn btn_red">Cancel</div>
+          </div>
+        </div>
+      
       </div>
     {% endfor %}
   

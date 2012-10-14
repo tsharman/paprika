@@ -77,7 +77,7 @@ $(document).ready(function() {
         url : "/ajax/move_stage/",
         data : {
           "stage_index" : stage_index,
-          "order_id" : order_id
+          "order_id" : order_id,
         },
         async : true,
         success : function(response) {
