@@ -80,11 +80,11 @@
         <div class="state_bar">
           <div 
             {% if order.state == "current" %}
-              class = "btn btn_yellow"
+              class = "btn current_state btn_yellow"
             {% elif order.state == "done" %}
-              class = "btn btn_green"
+              class = "btn current_state btn_green"
             {% else %}
-              class  = "btn btn_red"
+              class  = "btn current_state btn_red"
             {% endif %}    
           >{{ order.state }}</div>
           <div class="state_options">

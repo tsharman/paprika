@@ -127,4 +127,18 @@ $(document).ready(function() {
 
   });
 
+
+  // current state btn
+  $(".current_state").click(function(e) {
+    state_options = $(this).siblings(".state_options");
+    if($(state_options).is(":hidden")) {
+      $(state_options).fadeIn(200);
+    }
+    else {
+      $(state_options).fadeOut(200);
+    }  
+  e.stopPropagation();
+  });
+
+
 });
