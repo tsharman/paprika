@@ -53,7 +53,7 @@
   <div id="order_list">
     
     {% for order in orders %}
-      <div class="order" data-orderid={{ order.id }}>
+      <div class="order" data-orderid={{ order.id }} data-orderstate={{ order.state}}>
         <div class="order_actions">
           <div class="btn btn_grey">Edit</div><div class="delete_btn btn btn_red">Delete</div>
         </div>
@@ -88,9 +88,9 @@
             {% endif %}    
           >{{ order.state }}</div>
           <div class="state_options">
-            <div class="btn btn_yellow">Current</div>
-            <div class="btn btn_green">Done</div>
-            <div class="btn btn_red">Cancel</div>
+            <div data-state="current" class="btn btn_yellow">Current</div>
+            <div data-state="done" class="btn btn_green">Done</div>
+            <div data-state="canceled" class="btn btn_red">Cancel</div>
           </div>
         </div>
       

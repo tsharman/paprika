@@ -141,14 +141,15 @@ $(document).ready(function() {
   });
 
   $(".state_options .btn").click(function(e) {
-    new_state = $(this).text();
-
-    current_state = $(this).parent().siblings(".current_state").text();
-    order_id = $(this).parent().parent().parent().attr("data-orderid");
+    new_state = $(this).attr("data-state");
+  
+    orderdiv = $(this).parent().parent().parent();
+    current_state = $(orderdiv).attr("data-orderstate");
+    order_id = $(orderdiv).attr("data-orderid");
     
     if(current_state != new_state) {
       $(this).parent().slideDown(200, function() {
-        $(this).parent().parent().parent().slideUp(200);
+        $(orderdiv).slideUp(200);
       });
 
       $.ajax({
