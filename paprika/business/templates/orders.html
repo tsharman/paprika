@@ -43,9 +43,9 @@
 {% block content %}
 <div id="left_box">
   <div id="sub_nav">
-    <a href="/bu/orders/current/">Current</a>
-    <a href="/bu/orders/done/">Done</a>
-    <a href="/bu/orders/canceled/">Canceled</a>
+    <a href="/bu/orders/current/" {% if order_state == 'current' %} class="btn btn_yellow" {% endif %}>Current</a>
+    <a href="/bu/orders/done/" {% if order_state == 'done' %} class="btn btn_green" {% endif %}>Done</a>
+    <a href="/bu/orders/canceled/" {% if order_state == 'canceled' %} class="btn btn_red" {% endif %}>Canceled</a>
   </div>
 </div><div id="right_box">
   <div id="add_order_btn" class="btn btn_green">+ Add an order</div>

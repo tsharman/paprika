@@ -132,6 +132,7 @@ $(document).ready(function() {
   $(".current_state").click(function(e) {
     state_options = $(this).siblings(".state_options");
     if($(state_options).is(":hidden")) {
+      $(".state_options").fadeOut(200);
       $(state_options).fadeIn(200);
     }
     else {

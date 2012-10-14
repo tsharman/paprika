@@ -12,7 +12,7 @@ def orders(request, order_state):
     # filtering through different order states
     their_orders = Order.objects.filter(merchant=request.user, state=order_state).order_by('-time_entered')
 
-    return render_to_response('orders.html', {'user' : request.user, 'orders' : their_orders}, context_instance=RequestContext(request))
+    return render_to_response('orders.html', {'user' : request.user, 'orders' : their_orders, 'order_state' : order_state}, context_instance=RequestContext(request))
   elif request.method == 'POST':
     form = OrderForm(request.POST)
     if not form.is_valid():
