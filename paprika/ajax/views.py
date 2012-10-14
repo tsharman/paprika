@@ -22,10 +22,10 @@ def move_stage(request):
 def set_state(request):
   if request.method == 'POST':
     order_id = request.POST.get('order_id')
-    new_state = request.POST.get('new_state');
+    new_state = request.POST.get('new_state')
 
     order = Order.objects.get(id = order_id)
-    order.state = new_state
+    order.state = new_state.lower()
     order.save()
     
     return HttpResponse(order.cust_name)

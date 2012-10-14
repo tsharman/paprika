@@ -140,5 +140,35 @@ $(document).ready(function() {
   e.stopPropagation();
   });
 
+  $(".state_options .btn").click(function(e) {
+    new_state = $(this).text();
 
+    current_state = $(this).parent().siblings(".current_state").text();
+    order_id = $(this).parent().parent().parent().attr("data-orderid");
+    
+    if(current_state != new_state) {
+      $(this).parent().slideDown(200, function() {
+        $(this).parent().parent().parent().slideUp(200);
+      });
+
+      $.ajax({
+        beforeSend : function(xhr, settings) {
+         xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+        },
+        type : "POST",
+        url : "/ajax/set_state/",
+        data : {
+          "order_id" : order_id,
+          "new_state" : new_state
+        },
+        async: true,
+        success : function(response) {
+        },
+        error : function(response) {
+        }
+      });
+    }
+
+    e.stopPropagation();
+  });
 });
