@@ -12,6 +12,7 @@ urlpatterns = patterns('',
     url(r'^logout/', 'paprika.views.signout'),
     url(r'^signup/', 'paprika.views.signup'),
     url(r'^bu/', include('paprika.business.urls')),
+    url(r'^cu/', include('paprika.customer.urls')),
     url(r'^ajax/', include('paprika.ajax.urls')),
     # Examples:
     # url(r'^$', 'paprika.views.home', name='home'),
