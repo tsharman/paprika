@@ -33,6 +33,13 @@
       <input type="submit" class="btn btn_green" value="Add Order" />
     </form>
   </div>
+  <div id="delete_order_dialog" class="dialog">
+    <div class="close_dialog">x</div>
+    <h2 class="title">Delete this order</h2>
+    <h4>Are you sure you want to delete this order?</h4>
+    <div class="btn btn_green close" id="no_delete_btn">Nevermind, take me back.</div>
+    <div class="btn btn_red" id="yes_delete_btn">Yes, please delete this order.</div>
+  </div>
 {% endblock %}
 
 
@@ -40,9 +47,9 @@
 {% block content %}
 <div id="left_box">
   <div id="sub_nav">
-    <a href="/bu/orders/current/">Current</a>
-    <a href="/bu/orders/done/">Done</a>
-    <a href="/bu/orders/canceled/">Canceled</a>
+    <a href="/bu/orders/current/" {% if order_state == 'current' %} class="btn btn_yellow" {% endif %}>Current</a>
+    <a href="/bu/orders/done/" {% if order_state == 'done' %} class="btn btn_green" {% endif %}>Done</a>
+    <a href="/bu/orders/canceled/" {% if order_state == 'canceled' %} class="btn btn_red" {% endif %}>Canceled</a>
   </div>
 </div><div id="right_box">
   <div id="add_order_btn" class="btn btn_green">+ Add an order</div>
@@ -50,9 +57,9 @@
   <div id="order_list">
     
     {% for order in orders %}
-      <div class="order" data-orderid={{ order.id }}>
+      <div class="order" data-orderid={{ order.id }} data-orderstate={{ order.state}}>
         <div class="order_actions">
-          <div class="btn btn_grey">Edit</div><div class="btn btn_red">Delete</div>
+          <div class="btn btn_grey">Edit</div><div class="delete_btn btn btn_red">Delete</div>
         </div>
         <h2 class="customer">{{ order.cust_name }}</h3>
         <h3 class="customer_email">{{ order.cust_email }}</h3>
@@ -72,6 +79,23 @@
               <h4 class="stage_title">{{ stage.title }}</h4>
             </div>
           {% endfor %}
+        </div>
+      
+        <div class="state_bar">
+          <div 
+            {% if order.state == "current" %}
+              class = "btn current_state btn_yellow"
+            {% elif order.state == "done" %}
+              class = "btn current_state btn_green"
+            {% else %}
+              class  = "btn current_state btn_red"
+            {% endif %}    
+          >{{ order.state }}</div>
+          <div class="state_options">
+            <div data-state="current" class="btn btn_yellow">Current</div>
+            <div data-state="done" class="btn btn_green">Done</div>
+            <div data-state="canceled" class="btn btn_red">Cancel</div>
+          </div>
         </div>
       
       </div>

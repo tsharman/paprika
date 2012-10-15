@@ -3,7 +3,7 @@
 import os.path
 from paprika.local_settings import *
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (

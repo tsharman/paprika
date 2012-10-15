@@ -4,7 +4,8 @@
 <head>
   <title>Paprika | {{ user.business.business_name }}</title>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> 
-  <script src="{{ STATIC_URL }}js/jquery.cookie.js"></script>
+  <script src="{{ STATIC_URL }}js/jquery.cookie.js"></script> 
+  <link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.png">
   {% compress js %}
     {% block js %}
     {% endblock %}
@@ -43,7 +44,7 @@
     </div>
     <h3 id="welcome">Welcome {{ user.business.business_name }}!</h3>
     <div id="nav">
-      <a href="/bu/orders/" {% if order_state = 'current' %}class="active"{% endif %}>Orders</a>
+      <a href="/bu/orders/">Orders</a>
       <a href="/bu/flows/">Flows</a>
       <a href="/bu/account/">Account</a>
       <a href="/logout/" class="right">Sign Out</a>

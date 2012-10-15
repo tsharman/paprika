@@ -2,10 +2,10 @@
 @import "fonts.less";
 @import "input.less";
 @import "buttons.less";
-
+@import "dialog.less";
 
 body {
-  background: url('../img/noisy_grid.png');
+/*  background: url('../img/noisy_grid.png'); */
 }
 
 #container {
@@ -18,7 +18,7 @@ body {
   }
   #container h1 {
     font-size: 30px;
-    font-weight: 500;
+    font-weight: 800;
     color: @paprika-pink;
     margin-top: 10px;
     margin-bottom: 10px; 
@@ -33,3 +33,15 @@ body {
 #sign_up_btn {
   margin-top: 10px;
 }
+
+#sign_up_dialog {
+  width: 200px;
+  text-align: center;
+}
+  #sign_up_dialog h1 {
+    margin-bottom: 10px;
+  }
+  #sign_up_dialog input {
+    margin-bottom: 10px;
+  }
+

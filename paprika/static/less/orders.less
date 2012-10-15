@@ -21,11 +21,12 @@
 #sub_nav {
 }
   #sub_nav a {
-    font-size: 13px;
-    text-transform: uppercase;
-    color: #999; 
+    .btn;
     display: block;
-    padding: 5px;
+    color: #999;
+  }
+  #sub_nav .btn {
+    color: #fff;
   }
     #sub_nav a:hover {
       background: #999;
@@ -53,12 +54,14 @@
 }
   #order_list .order {
     position: relative;
-    padding: 10px;
+    padding: 10px 10px 40px 10px;
     margin-bottom: 40px;
     background: white;
     box-shadow: 0px 0px 2px 2px #ccc;
     word-wrap: break-word;
   }
+    #order_list .order .stages {
+    }
     #order_list .order .order_actions {
       position: absolute;
       right: 0px;
@@ -82,10 +85,32 @@
       font-size: 15px;
       color: #aaa;
     }
+    
+
+.state_bar {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+}
+  .state_bar .state_options {
+    display: none;
+    position: absolute;
+    padding: 5px;
+    right: -110px;
+    bottom: 0px;
+    width: 100px;
+    background: #ccc;
+    z-index: 99;
+  }
+    .state_bar .state_options .btn {
+      width: 80px;
+    }
 
 #add_order_dialog {
 }
   #add_order_dialog form {
   }
+
+
 
 

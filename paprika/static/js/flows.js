@@ -7,7 +7,7 @@ $(document).ready(function() {
   });
 
   //close the dialog
-  $(".close_dialog").click(function() {
+  $(".close_dialog, .close").click(function() {
     $(this).parent().fadeOut(200, function() {
       $("#dialogs").fadeOut(200);
     });
@@ -30,6 +30,42 @@ $(document).ready(function() {
   $(".remove_stage").live('click', function() {
     var stage_form = $(this).parent();
     stage_form.remove();
+  });
+
+  $(".delete_btn").click(function() {
+    currentFlow = $(this).parent().parent();
+    $("#dialogs").fadeIn(200, function() {
+      $("#delete_flow_dialog").fadeIn(200);
+    });
+  });
+
+  // yes delete buttn
+  $("#yes_delete_btn").click(function() {
+    flowId = $(currentFlow).attr("data-flowid");
+    $.ajax({
+      beforeSend : function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      },
+      type : "POST",
+      url : "/ajax/delete_flow/",
+      data : {
+        "flow_id" : flowId
+      },
+      async: true,
+      success : function(response) {
+        console.log(response);
+      },
+      error : function(response) {
+        console.log(response);
+      }
+    });
+
+    $("#delete_flow_dialog").fadeOut(200, function() {
+      $("#dialogs").fadeOut(200);
+    });
+    
+    $(currentFlow).delay(400).slideUp(200);
+
   });
 
 });

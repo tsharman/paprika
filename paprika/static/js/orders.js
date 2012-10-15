@@ -30,25 +30,10 @@ $(document).ready(function() {
   });
 
   //close the dialog
-  $(".close_dialog").click(function() {
+  $(".close_dialog, .close").click(function() {
     $(this).parent().fadeOut(200, function() {
       $("#dialogs").fadeOut(200);
     });
-  });
-
-  //hover over stages
-  $(".stage").hover(function() {
-    if(!$(this).hasClass('active')) {
-      $(this).children(".status_bar").css("background-color", "#ff835d");
-      $(this).children(".stage_title").hide();
-      $(this).children(".start_here").show();
-    }
-  }, function() {
-    if(!$(this).hasClass('active')) {
-      $(this).children(".status_bar").css("background-color", "#888");
-      $(this).children(".start_here").hide();
-      $(this).children(".stage_title").show();
-    }
   });
 
   // click stage to update position
@@ -77,7 +62,7 @@ $(document).ready(function() {
         url : "/ajax/move_stage/",
         data : {
           "stage_index" : stage_index,
-          "order_id" : order_id
+          "order_id" : order_id,
         },
         async : true,
         success : function(response) {
@@ -89,5 +74,88 @@ $(document).ready(function() {
       });
     }
   });
+  
+  $(".delete_btn").click(function(e) {
+    e.stopPropagation();
+    currentFlow = $(this).parent().parent();
+    $("#dialogs").fadeIn(200, function() {
+      $("#delete_order_dialog").fadeIn(200);
+    });
+  });
 
+  // yes delete buttn
+  $("#yes_delete_btn").click(function() {
+    orderId = $(currentFlow).attr("data-orderid");
+    $.ajax({
+      beforeSend : function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      },
+      type : "POST",
+      url : "/ajax/delete_order/",
+      data : {
+        "order_id" : orderId
+      },
+      async: true,
+      success : function(response) {
+        console.log(response);
+      },
+      error : function(response) {
+        console.log(response);
+      }
+    });
+
+    $("#delete_order_dialog").fadeOut(200, function() {
+      $("#dialogs").fadeOut(200);
+    });
+    
+    $(currentFlow).delay(400).slideUp(200);
+
+  });
+
+
+  // current state btn
+  $(".current_state").click(function(e) {
+    state_options = $(this).siblings(".state_options");
+    if($(state_options).is(":hidden")) {
+      $(".state_options").fadeOut(200);
+      $(state_options).fadeIn(200);
+    }
+    else {
+      $(state_options).fadeOut(200);
+    }  
+  e.stopPropagation();
+  });
+
+  $(".state_options .btn").click(function(e) {
+    new_state = $(this).attr("data-state");
+  
+    orderdiv = $(this).parent().parent().parent();
+    current_state = $(orderdiv).attr("data-orderstate");
+    order_id = $(orderdiv).attr("data-orderid");
+    
+    if(current_state != new_state) {
+      $(this).parent().slideDown(200, function() {
+        $(orderdiv).slideUp(200);
+      });
+
+      $.ajax({
+        beforeSend : function(xhr, settings) {
+         xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+        },
+        type : "POST",
+        url : "/ajax/set_state/",
+        data : {
+          "order_id" : order_id,
+          "new_state" : new_state
+        },
+        async: true,
+        success : function(response) {
+        },
+        error : function(response) {
+        }
+      });
+    }
+
+    e.stopPropagation();
+  });
 });

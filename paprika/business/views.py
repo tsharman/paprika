@@ -10,9 +10,8 @@ from django.contrib.auth.models import User
 def orders(request, order_state):
   if request.method == 'GET': #render orders page
     their_orders = Order.objects.filter(merchant=request.user, state=order_state).order_by('-time_entered')
-    return render_to_response('orders.html', {'user' : request.user, 'orders' : their_orders}, context_instance=RequestContext(request))
-  
-  elif request.method == 'POST': #add new order
+    return render_to_response('orders.html', {'user' : request.user, 'orders' : their_orders, 'order_state' : order_state}, context_instance=RequestContext(request))
+  elif request.method == 'POST':
     form = OrderForm(request.POST)
     if not form.is_valid():
 			return HttpResponse("Form is not valid.")
@@ -34,7 +33,8 @@ def orders(request, order_state):
 @login_required(login_url='/')
 def flows(request):
   if request.method == 'GET':
-    return render(request, 'flows.html')
+    flowset = Flow.objects.filter(owner = request.user.business, deleted = False)
+    return render_to_response('flows.html', { "flows" : flowset}, context_instance=RequestContext(request))
   elif request.method == 'POST':
     flow_name = request.POST.get('flow_name')
     stage_titles = request.POST.getlist('stage_titles')
@@ -49,6 +49,9 @@ def flows(request):
       
       
     return HttpResponseRedirect("/bu/flows/")
+  else:
+    return HttpResponseBadRequest();
+
 
 @login_required(login_url='/')
 def account(request):
