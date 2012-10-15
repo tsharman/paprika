@@ -3,7 +3,12 @@
 import os.path
 from paprika.local_settings import *
 
-DEBUG = False
+import socket
+if socket.gethostname() == 'paprika.io':
+    DEBUG = False
+else:
+    DEBUG = True
+
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -82,7 +87,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
 )
-
 
 COMPRESS_PRECOMPILERS = (
   ('text/less', 'lessc {infile} {outfile}'),
