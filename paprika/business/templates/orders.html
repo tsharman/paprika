@@ -14,11 +14,15 @@
     <h2 class="title">Add an order</h2>
     <form method="POST" action="/bu/orders/">
       {% csrf_token %}
-      <p><input type="text" name="cust_name" placeholder="Customer name" /></p>
+      <p>
+        <input type="text" name="cust_name" placeholder="Customer name" />
+        <input type="text" name="quick_glance_statement" placeholder="Quick Glance Explanation"/>
+      </p>
       <p>
         <input type="text" name="cust_phone" placeholder="Phone number"/>
         <input type="text" name="cust_email" placeholder="Email address" />
-      </p>
+				<input type="text" name="notes" placeholder="Notes"/>
+			</p>
       <select name="flow">
         {% for flow in user.business.flows.all %}
           <option value={{ flow.id }}>{{ flow.flow_name }}</option>
