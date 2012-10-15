@@ -19,8 +19,9 @@ def signup(request):
       business_prof.save()
       return signin(request)
     else:
-      return HttpResponseRedirect('/')
+      return HttpResponseRedirect('/bu/')
   else:
+    return HttpResponseBadRequest()
     return render(request, 'signup.html')
 
 def signin(request):
@@ -37,7 +38,7 @@ def signin(request):
     else:
       return HttpResponse('Login Failed!')
   else:
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/bu/')
 
 def signout(request):
   logout(request)

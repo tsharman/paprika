@@ -36,21 +36,6 @@ $(document).ready(function() {
     });
   });
 
-  //hover over stages
-  $(".stage").hover(function() {
-    if(!$(this).hasClass('active')) {
-      $(this).children(".status_bar").css("background-color", "#ff835d");
-      $(this).children(".stage_title").hide();
-      $(this).children(".start_here").show();
-    }
-  }, function() {
-    if(!$(this).hasClass('active')) {
-      $(this).children(".status_bar").css("background-color", "#888");
-      $(this).children(".start_here").hide();
-      $(this).children(".stage_title").show();
-    }
-  });
-
   // click stage to update position
   $(".stage").click(function() {
     if(!$(this).children('.status_bar').hasClass('active')) {

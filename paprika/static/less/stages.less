@@ -13,24 +13,23 @@
     cursor: pointer;
     display: table;
   }
+    .stages .stage:hover {
+      background: #666;
+    }
     .stages .stage .start_here {
       display: none;
       line-height: 100px;
     }
     .stages .stage .status_bar {
-      position: absolute;
-      top: 0; left: 0;
       background: #888;
-      height: 100%;
-      line-height: 100px;
+      height: 25px;
+      line-height: 25px;
       color: #ddd;
       font-size: 20px;
       padding: 0px 5px;
     }
     .stages .stage h4 {
-      display: table-cell;
-      padding-left: 25px;
-      vertical-align: middle;
+      margin-top: 20px;
     }
   .stages .active .status_bar {
     background: @paprika-green;
