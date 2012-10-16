@@ -1,9 +1,17 @@
 $(document).ready(function() {
-  currentSlide = $("#slide2");
+  currentSlide = $("#heading");
   $(document).keydown(function(e) {
-    if(e.keyCode == 40 && $(currentSlide).hasClass('slide')) {
+    if(e.keyCode == 40) {
+      if($(currentSlide).next().hasClass('slide')) {
+        currentSlide = $(currentSlide).next();
+      }
       $('html, body').animate({ scrollTop: currentSlide.offset().top + 200 }, { duration : 'slow', easing : 'swing' });
-      currentSlide = $(currentSlide).next();
+    }
+    else if(e.keyCode == 38) {
+      if($(currentSlide).prev().hasClass('slide')) {
+        currentSlide = $(currentSlide).prev();
+      }
+      $('html, body').animate({ scrollTop: currentSlide.offset().top + 200 }, { duration : 'slow', easing : 'swing' });
     }
   });
   
