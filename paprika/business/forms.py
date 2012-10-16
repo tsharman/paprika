@@ -2,7 +2,13 @@ from django.forms import ModelForm
 from paprika.models import Order
 
 class OrderForm(ModelForm):
-  class Meta:
-    model = Order
-    exclude = ('merchant', 'notes', 'current_stage', 'state',)
+	def __init__(self, *args, **kwargs):
+		super(OrderForm, self).__init__(*args, **kwargs)
+		self.fields['cust_phone'].required = False
+		self.fields['cust_email'].required = False
 
+	class Meta:
+		model = Order
+		exclude = ('merchant', 
+			'current_stage', 
+			'state')

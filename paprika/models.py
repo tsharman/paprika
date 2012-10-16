@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.localflavor.us.models import PhoneNumberField
 from django.contrib import admin
+from django import forms
 
 class BusinessProfile(models.Model):
   user = models.OneToOneField(User, primary_key=True, related_name='business')
@@ -16,7 +17,6 @@ class Flow(models.Model):
   deleted = models.BooleanField(default=False)
   def sorted_stages(self):
     return self.stages.order_by('stage_num')
-
   def __unicode__(self):
     return "Flow " + self.flow_name
 
@@ -33,11 +33,11 @@ class Stage(models.Model):
 class Order(models.Model):
   flow = models.ForeignKey(Flow, related_name="orders")
   merchant = models.ForeignKey(BusinessProfile, related_name="orders")
-  order_code = models.CharField(max_length=40, default='')
+  order_code = models.CharField(max_length=40, default='', blank=True)
   current_stage = models.ForeignKey(Stage)
   cust_name = models.CharField(max_length=50)
-  cust_phone = PhoneNumberField(default='0000000000')
-  cust_email = models.EmailField(max_length=254, default='')
+  cust_phone = PhoneNumberField(default='000-000-0000')
+  cust_email = models.EmailField(max_length=254, default='none@none.com')
   notes = models.CharField(max_length=300, default='', blank=True)
   time_entered = models.DateTimeField(auto_now_add=True)
   STATE_CHOICES = (
@@ -46,6 +46,7 @@ class Order(models.Model):
     ('canceled', 'canceled'),
   )
   state = models.CharField(max_length = 10, choices = STATE_CHOICES, default='current')
+  quick_glance_statement = models.CharField(max_length = 100, default='', blank=True)
   def __unicode__(self):
     return "Order " + self.order_code
 

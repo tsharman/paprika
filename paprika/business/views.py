@@ -8,23 +8,25 @@ from django.contrib.auth.models import User
 
 @login_required(login_url='/')
 def orders(request, order_state):
-  if request.method == 'GET':
-    # filtering through different order states
+  if request.method == 'GET': #render orders page
     their_orders = Order.objects.filter(merchant=request.user, state=order_state).order_by('-time_entered')
-
     return render_to_response('orders.html', {'user' : request.user, 'orders' : their_orders, 'order_state' : order_state}, context_instance=RequestContext(request))
   elif request.method == 'POST':
     form = OrderForm(request.POST)
     if not form.is_valid():
-      print form.errors
-      print "check it: %s" % form.is_bound
-      return HttpResponse("not valid!" + request.POST.get('cust_name'))
-    else:
-      order = form.save(commit=False)
-      order.merchant = BusinessProfile.objects.get(user=request.user)
-      order.current_stage = order.flow.stages.get(stage_num=1)
-      order.save()
-      return HttpResponseRedirect('/bu/orders/')
+			return HttpResponse("Form is not valid.")
+    order = form.save(commit=False)
+    
+    order.merchant = BusinessProfile.objects.get(user=request.user)
+    order.current_stage = order.flow.stages.get(stage_num=1)
+		
+		#verify method of contact
+    if order.cust_phone == '' and order.cust_email == '':
+			return HttpResponse("Must have a method of contact.")
+		
+    order.save()
+    return HttpResponseRedirect('/bu/orders/')
+  
   else:
     return HttpResponseBadRequest()
 
@@ -53,9 +55,10 @@ def flows(request):
 
 @login_required(login_url='/')
 def account(request):
-	if request.method == 'GET':
+	if request.method == 'GET': #render account page
 		return render_to_response('account.html', {'user' : request.user}, context_instance=RequestContext(request))
-	elif request.method == 'POST':
+
+	elif request.method == 'POST': #update account
 		user = request.user
 
 		#get post data
@@ -69,12 +72,12 @@ def account(request):
 		user.username = user_name
 		user.email = email
 		if new_password != "": #lame, will be better than this
-			user.set_password(new_password);
-
-		#save business profile
+			user.set_password(new_password); 
+		
+		#save models
 		user.save()
 		user.business.save()
-
+		
 		#refresh page
 		return render_to_response('account.html', {'user' : request.user}, context_instance=RequestContext(request))
 
