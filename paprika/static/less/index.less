@@ -10,18 +10,89 @@ body {
 
 #container {
   text-align: center;
-  width: 480px;
-  margin: 15% auto 0px auto;
+  width: 100%;
+  margin: 0px auto 0px auto;
 }
-  #container img {
+  #container #heading {
+    margin-top: 15%;
+    margin-bottom: 200px;
+    text-align: center;
+  }
+    #container #heading img {
+      width: 100px;
+    }
+  #container .slide {
+    width: 100%;
+    padding: 300px 0px;
+  }
+    #container .slide .screen {
+      margin-top: 30px;
+      border: 10px solid #444;
+    }
+  #container .slidealt {
+    background: @paprika-pink;
+    color: white;
+  }
+    #container .slidealt h1 {
+      color: white;
+    }
+
+/* SLIDES */
+#slide 1 {
+}
+  #slide1 img {
     width: 100px;
   }
-  #container h1 {
-    font-size: 30px;
-    font-weight: 800;
+  #slide1 h1 {
+    font-weight: 700;
+  }
+
+#slide2 {
+}
+  #slide2 h2 {
+    font-weight: 300;
+    color: white; 
+  }
+  #slide2 h1 {
+    font-size: 50px;
+    font-weight: 600;
+    color: white;
+    width: 700px;
+    margin: 20px auto 0px auto;
+  }
+
+#slide3 {
+}
+  #slide3 h1 {
+    width: 600px;
+    margin: 30px auto;
+  }
+  #slide3 h2 {
+    font-weight: 300;
+    width: 600px;
+    margin: 20px auto;
+  }
+  #slide3 h3 {
     color: @paprika-pink;
-    margin-top: 10px;
-    margin-bottom: 10px; 
+    font-size: 30px
+    width: 500px;
+    margin: 20px auto 0px auto;
+  }
+
+#slide4 {
+}
+  #slide4 h1 {
+    margin: 30px auto;
+    color: white;
+  }
+  #slide4 h2 {
+    font-weight: 300;
+    color: white;
+  }
+
+#slide5 {
+}
+  #slide5 h1 {
   }
 
 #login_container {
@@ -31,7 +102,19 @@ body {
 }
 
 #sign_up_btn {
-  margin-top: 10px;
+  position: absolute;
+  right: 70px;
+  top: 5px;
+}
+#login_btn {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+}
+#customer_btn {
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 
 #sign_up_dialog {
@@ -45,3 +128,12 @@ body {
     margin-bottom: 10px;
   }
 
+#login_dialog {
+  width: 200px;
+}
+  #login_dialog h1 {
+    margin-bottom: 10px;
+  }
+  #login_dialog input {
+    margin-bottom: 10px;
+  }

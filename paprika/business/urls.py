@@ -10,4 +10,5 @@ urlpatterns = patterns('',
   url(r'^orders/canceled/', 'paprika.business.views.orders', { 'order_state' : 'canceled'}),
   url(r'^flows/$', 'paprika.business.views.flows'),
   url(r'^account/$', 'paprika.business.views.account'),
+  url(r'^requests/$', 'paprika.business.views.requests'),
 )

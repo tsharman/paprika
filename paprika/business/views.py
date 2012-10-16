@@ -78,3 +78,10 @@ def account(request):
 		#refresh page
 		return render_to_response('account.html', {'user' : request.user}, context_instance=RequestContext(request))
 
+
+@login_required(login_url='/')
+def requests(request):
+  if request.method == 'GET':
+    return render_to_response('requests.html', {'user' : request.user}, context_instance=RequestContext(request))
+  else:
+    return HttpResponseBadRequest()

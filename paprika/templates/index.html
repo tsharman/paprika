@@ -42,14 +42,10 @@
         <input class="btn btn_green" type="submit" value="Login" /> 
       </form>
     </div>
-  </div>
-  <div id="container">
-    <img src="{{ STATIC_URL }}img/logo.png" />
-    <h1>Paprika</h1>
-    <p>A friendly order tracking tool.</p>
-    <p>Made with &hearts; in Ann Arbor.</p> 
-    <div id="sign_up_btn" class="btn btn_pink" > Sign up! </div>
-    <div id="login_container">
+
+    <div class="dialog" id="login_dialog">
+      <div class="close_dialog">x</div>
+      <h1>Login</h1>
       <form method="POST" action="/login/">
         {% csrf_token %}
         <input type="text" name="username" placeholder="Username"/>
@@ -57,6 +53,43 @@
         <input class="btn btn_green" type="submit" value="Login" /> 
       </form>
     </div>
+
+  </div>
+  <div id="container">
+    <div id="heading">
+      <img src="{{ STATIC_URL }}img/logo.png" />
+      <h1>Paprika</h1>
+      <p>A friendly order tracking tool.</p>
+      <p>Made with &hearts; in Ann Arbor.</p> 
+    </div>
+    <div class="slide slidealt" id="slide2">
+      <h2>What does Paprika do?</h2>
+      <h1>Paprika allows your customers to follow along and stay up to date with their orders.</h1>
+    </div>
+    <div class="slide" id="slide3">
+      <h2>Why should I care?</h2>
+      <h1>Customers are curious and they want to feel like they are part of the process.</h1>
+      <h1>They will call (alot) in order to check in on their order.</h2>
+      <h1>These calls take time and when you're running a business these calls can become cumbersome.</h1>
+      <h2>Thats where Paprika comes in.</h2>
+    </div>
+    <div class="slide slidealt" id="slide4">
+      <h2>How does it work?</h2>
+      <h1>With Paprika you start by <b>defining</b> your flows.</h1>
+      <img src="{{ STATIC_URL }}img/create_a_flow.jpg" class="screen" />
+    </div>
+    <div class="slide" id="slide5">
+      <h1>Next you add an <b>order</b>.</h1>
+      <img src="{{ STATIC_URL }}img/add_an_order.jpg" class="screen"/>
+    </div>
+    <div class="slide slidealt" id="slide6">
+      <h1>As the order progresses, update its status.</h1>
+      <img src="{{ STATIC_URL }}img/update_order.jpg" class="screen"/>
+    </div> 
+ 
+    <div id="sign_up_btn" class="btn btn_pink" > Sign up! </div>
+    <div id="login_btn" class="btn btn_green">Login</div>
+    <a href="/" id="customer_btn" class="btn btn_green">I'm a Customer</a>
   </div>
 </body>
 </html>
