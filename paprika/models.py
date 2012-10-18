@@ -33,7 +33,6 @@ class Stage(models.Model):
 class Order(models.Model):
   flow = models.ForeignKey(Flow, related_name="orders")
   merchant = models.ForeignKey(BusinessProfile, related_name="orders")
-  order_code = models.CharField(max_length=40, default='', blank=True)
   current_stage = models.ForeignKey(Stage)
   cust_name = models.CharField(max_length=50)
   cust_phone = PhoneNumberField(default='000-000-0000')
@@ -49,7 +48,6 @@ class Order(models.Model):
   quick_glance_statement = models.CharField(max_length = 100, default='', blank=True)
   def __unicode__(self):
     return "Order " + self.order_code
-
 
 admin.site.register(Order)
 admin.site.register(Flow)
