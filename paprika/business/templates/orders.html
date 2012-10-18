@@ -9,6 +9,22 @@
 {% endblock %}
 
 {% block dialogs %}
+  <div id="edit_order_dialog" class="dialog">
+    <div class="close_dialog">x</div>
+    <h2 class="title">Edit order</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <p><input type="text" name="cust_name" placeholder="Customer name" /></p>
+      <p>
+        <input type="text" name="cust_phone" placeholder="Phone number"/>
+        <input type="text" name="cust_email" placeholder="Email address" />
+      </p>
+      <input type="text" name="order_code" placeholder="Order code"/>
+      <input type="text" name="notes" placeholder="Notes"/>
+      <input type="hidden" name="order_id" value="1"/>
+      <input type="button" class="submit_edit_btn btn btn_green" value="Submit Order Edit" />
+    </form>
+  </div>
   <div id="add_order_dialog" class="dialog">
     <div class="close_dialog">x</div>
     <h2 class="title">Add an order</h2>
@@ -16,7 +32,6 @@
       {% csrf_token %}
       <p>
         <input type="text" name="cust_name" placeholder="Customer name" />
-        <input type="text" name="quick_glance_statement" placeholder="Quick Glance Explanation"/>
       </p>
       <p>
         <input type="text" name="cust_phone" placeholder="Phone number"/>
@@ -59,7 +74,7 @@
     {% for order in orders %}
       <div class="order" data-orderid={{ order.id }} data-orderstate={{ order.state}}>
         <div class="order_actions">
-          <div class="btn btn_grey">Edit</div><div class="delete_btn btn btn_red">Delete</div>
+          <div class="edit_btn btn btn_grey">Edit</div><div class="delete_btn btn btn_red">Delete</div>
         </div>
         <h2 class="customer">{{ order.cust_name }}</h3>
         <h3 class="customer_email">{{ order.cust_email }}</h3>
