@@ -60,28 +60,26 @@ def edit_order(request):
     order = Order.objects.get(id = order_id)
     return HttpResponse(order.jsonify(), mimetype='application/json')
   elif request.method == 'POST':
-    oldorder = Order.objects.get(id=request.POST.get('order_id'))
-    cust_email = request.POST.get('cust_email')
-    cust_phone = request.POST.get('cust_phone')
-    cust_name = request.POST.get('cust_name')
-    notes = request.POST.get('notes')
+    order = Order.objects.get(id=request.POST.get('order_id'))
 
-    newargs = {"flow": oldorder.flow.id, "order_code" : oldorder.order_code, "cust_name" : cust_name, "cust_phone" : cust_phone, "cust_email" : cust_email, "notes" : notes, "time_entered" : oldorder.time_entered}
+    flow_id = order.flow.id
 
+    form_args = { "flow" : flow_id }
+    form_args.update(request.POST)
 
-    form = OrderForm(newargs)
+    #print "args %s" % form_args
+    print "args %s" % request.POST
+
+    form = OrderForm(request.POST, instance=order)
+    print form
     if not form.is_valid():
       return HttpResponseBadRequest(form.errors)
-    neworder = form.save(commit=False)
-    neworder.merchant = BusinessProfile.objects.get(user=request.user)
-    neworder.current_stage = oldorder.flow.stages.get(stage_num=1)
 
 		#verify method of contact
-    if neworder.cust_phone == '' and neworder.cust_email == '':
+    if order.cust_phone == '' and order.cust_email == '':
 			return HttpResponseBadRequest("Must have a method of contact.")
 
-    neworder.save()
-    oldorder.delete()
+    order.save()
     return HttpResponse()
   else:
     return HttpResponseBadRequest()

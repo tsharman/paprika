@@ -137,6 +137,7 @@ $(document).ready(function() {
         $("#edit_order_dialog input[name=cust_phone]").val(response['cust_phone']);
         $("#edit_order_dialog input[name=cust_name]").val(response['cust_name']);
         $("#edit_order_dialog input[name=notes]").val(response['notes']);
+        $("#edit_order_dialog input[name=flow_id]").val(response['flow']);
       },
       error : function(response) {
         console.log(response);
@@ -150,6 +151,7 @@ $(document).ready(function() {
     cust_phone = $("#edit_order_dialog input[name=cust_phone]").val();
     cust_name= $("#edit_order_dialog input[name=cust_name]").val();
     notes = $("#edit_order_dialog input[name=notes]").val();
+    flow_id = $("#edit_order_dialog input[name=flow_id]").val();
     $.ajax({
       beforeSend : function(xhr, settings) {
         xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
@@ -162,6 +164,7 @@ $(document).ready(function() {
         "cust_name" : cust_name, 
         "cust_phone" : cust_phone, 
         "notes" : notes, 
+        "flow" : flow_id,
       },
       async: true,
       success : function(response) {
