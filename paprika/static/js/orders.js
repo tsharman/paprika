@@ -74,14 +74,16 @@ $(document).ready(function() {
       });
     }
   });
-  
+  //Hook up delete button to delete dialog 
   $(".delete_btn").click(function(e) {
     e.stopPropagation();
     currentFlow = $(this).parent().parent();
+    orderId = $(currentFlow).attr("data-orderid");
     $("#dialogs").fadeIn(200, function() {
       $("#delete_order_dialog").fadeIn(200);
     });
   });
+  
 
   // yes delete buttn
   $("#yes_delete_btn").click(function() {
@@ -103,13 +105,80 @@ $(document).ready(function() {
         console.log(response);
       }
     });
-
     $("#delete_order_dialog").fadeOut(200, function() {
       $("#dialogs").fadeOut(200);
     });
-    
     $(currentFlow).delay(400).slideUp(200);
+  });
 
+  //Hook up edit button to this function
+  $(".edit_btn").click(function(e) {
+    e.stopPropagation();
+    currentFlow = $(this).parent().parent();
+    orderId = $(currentFlow).attr("data-orderid");
+    $.ajax({
+      beforeSend : function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      },
+      type : "GET",
+      url : "/ajax/edit_order/",
+      data : {
+        "order_id" : orderId
+      },
+      async: true,
+      success : function(response) {
+        console.log(response);
+        $("#dialogs").fadeIn(200, function() {
+          $("#edit_order_dialog").fadeIn(200);
+        });
+
+        $("#edit_order_dialog input[name=order_id]").val(orderId);
+        $("#edit_order_dialog input[name=cust_email]").val(response['cust_email']);
+        $("#edit_order_dialog input[name=cust_phone]").val(response['cust_phone']);
+        $("#edit_order_dialog input[name=cust_name]").val(response['cust_name']);
+        $("#edit_order_dialog input[name=notes]").val(response['notes']);
+        $("#edit_order_dialog input[name=flow_id]").val(response['flow']);
+      },
+      error : function(response) {
+        console.log(response);
+      }
+    });
+  });
+
+  $(".submit_edit_btn").click(function(e) {
+    orderId = $("#edit_order_dialog input[name=order_id]").val();
+    cust_email = $("#edit_order_dialog input[name=cust_email]").val();
+    cust_phone = $("#edit_order_dialog input[name=cust_phone]").val();
+    cust_name= $("#edit_order_dialog input[name=cust_name]").val();
+    notes = $("#edit_order_dialog input[name=notes]").val();
+    flow_id = $("#edit_order_dialog input[name=flow_id]").val();
+    $.ajax({
+      beforeSend : function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      },
+      type : "POST",
+      url : "/ajax/edit_order/",
+      data : {
+        "order_id" : orderId,
+        "cust_email" : cust_email,
+        "cust_name" : cust_name, 
+        "cust_phone" : cust_phone, 
+        "notes" : notes, 
+        "flow" : flow_id,
+      },
+      async: true,
+      success : function(response) {
+        console.log(response);
+        window.location.replace("/bu/orders/");
+        $("#edit_order_dialog").fadeOut(200, function() {
+          $("#dialogs").fadeOut(200);
+        });
+      },
+      error : function(response) {
+        console.log(response.responseText);
+        alert(response.responseText);
+      }
+    });
   });
 
 

@@ -46,7 +46,17 @@ class Order(models.Model):
   )
   state = models.CharField(max_length = 10, choices = STATE_CHOICES, default='current')
   def __unicode__(self):
-    return "Order " + self.order_code
+    return "Order " + self.cust_name
+
+  def jsonify(self):
+    import json
+    ret = {}
+    ret['cust_name'] = self.cust_name
+    ret['cust_phone'] = self.cust_phone
+    ret['cust_email'] = self.cust_email
+    ret['notes'] = self.notes
+    ret['flow'] = self.flow.id
+    return json.dumps(ret)
 
 admin.site.register(Order)
 admin.site.register(Flow)
