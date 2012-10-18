@@ -28,15 +28,15 @@ class Stage(models.Model):
   notes = models.CharField(max_length=300, blank=True)
   deleted = models.BooleanField(default=False)
   def __unicode__(self):
-    return self.title
+    return self.title 
 
 class Order(models.Model):
   flow = models.ForeignKey(Flow, related_name="orders")
   merchant = models.ForeignKey(BusinessProfile, related_name="orders")
   current_stage = models.ForeignKey(Stage)
   cust_name = models.CharField(max_length=50)
-  cust_phone = PhoneNumberField(default='000-000-0000')
-  cust_email = models.EmailField(max_length=254, default='none@none.com')
+  cust_phone = PhoneNumberField()
+  cust_email = models.EmailField(max_length=254)
   notes = models.CharField(max_length=300, default='', blank=True)
   time_entered = models.DateTimeField(auto_now_add=True)
   STATE_CHOICES = (
@@ -45,7 +45,6 @@ class Order(models.Model):
     ('canceled', 'canceled'),
   )
   state = models.CharField(max_length = 10, choices = STATE_CHOICES, default='current')
-  quick_glance_statement = models.CharField(max_length = 100, default='', blank=True)
   def __unicode__(self):
     return "Order " + self.order_code
 

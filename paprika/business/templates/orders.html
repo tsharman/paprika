@@ -16,14 +16,11 @@
       {% csrf_token %}
       <p>
         <input type="text" name="cust_name" placeholder="Customer name" />
-        <input type="text" name="quick_glance_statement" placeholder="Quick Glance Explanation"/>
       </p>
       <p>
         <input type="text" name="cust_phone" placeholder="Phone number"/>
+        and/ or
         <input type="text" name="cust_email" placeholder="Email address" />
-			</p>
-      <p>	
-        <input type="text" name="notes" placeholder="Notes"/>
 			</p>
       <select name="flow">
         {% for flow in user.business.flows.all %}
