@@ -37,7 +37,6 @@ class Order(models.Model):
   cust_name = models.CharField(max_length=50)
   cust_phone = PhoneNumberField()
   cust_email = models.EmailField(max_length=254)
-  notes = models.CharField(max_length=300, default='', blank=True)
   time_entered = models.DateTimeField(auto_now_add=True)
   STATE_CHOICES = (
     ('current', 'current'),
@@ -57,6 +56,12 @@ class Order(models.Model):
     ret['notes'] = self.notes
     ret['flow'] = self.flow.id
     return json.dumps(ret)
+
+class Note(models.Model):
+  order = models.ForeignKey(Order, related_name="???")
+  text = models.CharField(max_length=100)
+  time_entered = models.DateTimeField(auto_now_add=True)
+
 
 admin.site.register(Order)
 admin.site.register(Flow)
