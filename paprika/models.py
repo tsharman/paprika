@@ -33,7 +33,6 @@ class Stage(models.Model):
 class Order(models.Model):
   flow = models.ForeignKey(Flow, related_name="orders")
   merchant = models.ForeignKey(BusinessProfile, related_name="orders")
-  order_code = models.CharField(max_length=40, default='', blank=True)
   current_stage = models.ForeignKey(Stage)
   cust_name = models.CharField(max_length=50)
   cust_phone = PhoneNumberField(default='000-000-0000')
