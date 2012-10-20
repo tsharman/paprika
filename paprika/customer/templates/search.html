@@ -39,8 +39,11 @@
       <input type="text" name="search_query" />
       <input type="submit" class="btn btn_green" value="Find my order!"/>
     </form>
-    
+ 
     <div id="search_results">
+      {% for result in order_results %}
+        <h2>{{ result.cust_name }}</h2>
+      {% endfor %}
     </div>
 
   </div>

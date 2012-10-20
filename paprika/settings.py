@@ -95,7 +95,6 @@ COMPRESS_PRECOMPILERS = (
 COMPRESS_OUTPUT_DIR = ''
 
 
-
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'e62h$88!hldz0#6#$is*8%=pw!v6ew48k)ld$ff)mz_ayrc4=@'
 
