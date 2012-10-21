@@ -42,7 +42,10 @@
  
     <div id="search_results">
       {% for result in order_results %}
-        <h2>{{ result.cust_name }}</h2>
+        <div class="search_result">
+          <h2 class="business_name">{{ result.merchant.business_name }}</h2>
+          <h3 class="time_entered">{{ result.time_entered }}</h3>
+        </div>
       {% endfor %}
     </div>
 

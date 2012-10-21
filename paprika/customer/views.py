@@ -10,7 +10,6 @@ def search(request):
     return render_to_response('search.html', {}, context_instance=RequestContext(request)) 
   elif request.method == 'POST':
     search_query = request.POST.get('search_query')
-
     order_results = Order.objects.filter(Q(cust_phone = search_query) | Q(cust_email = search_query))
     return render_to_response('search.html', { 'order_results' : order_results}, context_instance=RequestContext(request))
   else:
