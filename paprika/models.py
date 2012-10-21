@@ -58,6 +58,13 @@ class Order(models.Model):
     ret['flow'] = self.flow.id
     return json.dumps(ret)
 
+
+class FeedEntry(models.Model):
+  body = models.CharField(max_length=300)
+  time_entered = models.DateTimeField(auto_now_add=True)
+  order = models.ForeignKey(Order, related_name="feed_entries")
+
+admin.site.register(FeedEntry)
 admin.site.register(Order)
 admin.site.register(Flow)
 admin.site.register(Stage)
