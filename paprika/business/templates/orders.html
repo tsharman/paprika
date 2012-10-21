@@ -26,6 +26,8 @@
       <div class="submit_edit_btn btn btn_green">submit order edit</div>
     </form>
   </div>
+  
+
   <div id="add_order_dialog" class="dialog">
     <div class="close_dialog">x</div>
     <h2 class="title">Add an order</h2>
@@ -50,12 +52,20 @@
       <input type="submit" class="btn btn_green" value="Add Order" />
     </form>
   </div>
+  
+
   <div id="delete_order_dialog" class="dialog">
     <div class="close_dialog">x</div>
     <h2 class="title">Delete this order</h2>
     <h4>Are you sure you want to delete this order?</h4>
     <div class="btn btn_green close" id="no_delete_btn">Nevermind, take me back.</div>
     <div class="btn btn_red" id="yes_delete_btn">Yes, please delete this order.</div>
+  </div>
+
+
+  <div id="live_blog_dialog" class="dialog">
+    <div class="close_dialog">x</div>
+    <h2 class="title">Order Feed</h2>
   </div>
 {% endblock %}
 
@@ -118,6 +128,8 @@
             <div data-state="canceled" class="btn btn_red">Cancel</div>
           </div>
         </div>
+
+        <div class="feed_btn btn btn_grey">Feed</div>
       
       </div>
     {% endfor %}
