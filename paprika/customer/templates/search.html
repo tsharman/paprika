@@ -39,7 +39,8 @@
       <input type="text" name="search_query" />
       <input type="submit" class="btn btn_green" value="Find my order!"/>
     </form>
- 
+
+    {% if order_results %} 
     <div id="search_results">
       {% for result in order_results %}
         <div class="search_result">
@@ -48,6 +49,7 @@
         </div>
       {% endfor %}
     </div>
+    {% endif %}
 
   </div>
 </body>
