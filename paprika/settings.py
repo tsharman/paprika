@@ -11,14 +11,6 @@ else:
 
 TEMPLATE_DEBUG = DEBUG
 
-#Amazon S3 Config
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-#next two are optional
-AWS_HEADERS = {
-    'Cache-Control': 'max-age=86400',
-}
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -148,6 +140,7 @@ INSTALLED_APPS = (
     'paprika',
     'south',
     'compressor',
+    'oauth2app',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:

@@ -6,6 +6,9 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from paprika.forms import NewUserForm
 
+from oauth2app.authenticate import Authenticator, AuthenticationException
+from django.http import HttpResponse
+
 
 def index(request):
   return render(request, 'index.html')
@@ -47,3 +50,13 @@ def signout(request):
 @login_required(login_url='/')
 def orders(request):
   return render(request, 'orders.html')
+
+def test_auth(request):
+  authenticator = Authenticator()
+  try:
+      authenticator.validate(request)
+  except AuthenticationException:
+      return HttpResponse(content="Auth Failed.")
+  username = authenticator.user.username
+  return HttpResponse(content="Hi %s, You authenticated!" % username)
+

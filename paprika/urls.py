@@ -15,6 +15,9 @@ urlpatterns = patterns('',
     url(r'^bu/', include('paprika.business.urls')),
     url(r'^cu/', include('paprika.customer.urls')),
     url(r'^ajax/', include('paprika.ajax.urls')),
+    url(r'^oauth2/', include('paprika.oauth2.urls')),
+    url(r'^test_auth/', 'paprika.views.test_auth'),
+    
     # Examples:
     # url(r'^$', 'paprika.views.home', name='home'),
     # url(r'^paprika/', include('paprika.foo.urls')),
