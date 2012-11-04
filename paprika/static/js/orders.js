@@ -227,4 +227,67 @@ $(document).ready(function() {
 
     e.stopPropagation();
   });
+
+
+
+
+  // open feed btn
+  $(".feed_btn").click(function(e) {
+    
+    orderdiv = $(this).parent();
+    order_id = $(orderdiv).attr("data-orderid");
+    
+    $.ajax({
+      beforeSend : function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      },
+      type : "GET",
+      url : "/ajax/feed/",
+      data : {
+        "order_id" : order_id,
+      },
+      async: true,
+      success : function(response) {
+        $("#feed_list").html(response)
+      },
+      error : function(response) {
+      }
+    });
+
+    $("#dialogs").fadeIn(200, function() {
+      $("#feed_dialog").fadeIn(200);
+    });
+    e.stopPropagation();
+  });
+
+
+  // submit feed entry
+  $("#add_entry_btn").click(function() {
+    //when you open the feed it sets the global variable order_id
+    order_id = order_id;
+    body = $("#feed_entry").val();
+    
+    //making request to ajax endpoint
+    $.ajax({
+      beforeSend : function(xhr, settings) {
+        xhr.setRequestHeader("X-CSRFToken", $.cookie('csrftoken'));
+      },
+      type : "POST",
+      url : "/ajax/feed/",
+      data : {
+        "order_id" : order_id,
+        "body" : body,
+      },
+      async: true,
+      success : function(response) {
+        $("#feed_list").prepend(response)
+      },
+      error : function(response) {
+      }
+    });
+
+    
+  });
+
+
 });

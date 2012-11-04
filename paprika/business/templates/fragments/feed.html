@@ -1,0 +1,10 @@
+{% for entry in entries %}
+  <div class="feed_entry">
+    <div class="feed_body">
+      {{ entry.body }}
+    </div>
+    <div class="feed_timestamp">
+      {{ entry.time_entered }}
+    </div>
+  </div>
+{% endfor %}
