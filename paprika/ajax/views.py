@@ -1,7 +1,8 @@
 from django.http import HttpResponse, HttpResponseBadRequest, HttpResponseRedirect
 from django.forms import ValidationError
-from paprika.models import Order, Flow, BusinessProfile
+from paprika.models import Order, Flow, BusinessProfile, FeedEntry
 from paprika.business.forms import OrderForm
+from django.shortcuts import render_to_response
 
 def move_stage(request):
   if request.method == 'POST':
@@ -83,3 +84,23 @@ def edit_order(request):
     return HttpResponse()
   else:
     return HttpResponseBadRequest()
+
+
+def feed(request):
+  if request.method == 'GET':
+    order_id = request.GET.get('order_id')
+    entries = Order.objects.get(id = order_id).feed_entries.order_by('-time_entered').all
+    return render_to_response('fragments/feed.html', {'entries': entries})
+  elif request.method == 'POST':
+    order_id = request.POST.get('order_id')
+    body = request.POST.get('body')
+    feed_entry = FeedEntry(body = body, order_id = order_id)
+    feed_entry.save()
+    
+    # constructing entries list with only one entry
+    entries = [feed_entry,]
+    
+    #rendering with html, should only return a single feed_entry div
+    return render_to_response('fragments/feed.html', {'entries': entries})
+  else:
+    return HttpResponseBadRequest() 

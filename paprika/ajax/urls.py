@@ -7,4 +7,5 @@ urlpatterns = patterns('',
   url(r'^delete_order/', 'paprika.ajax.views.delete_order'),
   url(r'^edit_order/', 'paprika.ajax.views.edit_order'),
   url(r'^set_state/', 'paprika.ajax.views.set_state'),
+  url(r'^feed/', 'paprika.ajax.views.feed'),
 )
