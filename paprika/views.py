@@ -5,7 +5,7 @@ from paprika.models import BusinessProfile
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from paprika.forms import NewUserForm
-from oauth2app.authenticate import Authenticator, AuthenticationException
+#from oauth2app.authenticate import Authenticator, AuthenticationException
 from django.http import HttpResponse
 
 

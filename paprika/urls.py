@@ -1,9 +1,15 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
+from paprika.api.orders import *
+from tastypie.api import Api
+import settings
 admin.autodiscover()
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
 # admin.autodiscover()
+
+v1_api = Api(api_name='v1')
+v1_api.register(BuisnessProfileResource())
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
@@ -15,7 +21,8 @@ urlpatterns = patterns('',
     url(r'^bu/', include('paprika.business.urls')),
     url(r'^cu/', include('paprika.customer.urls')),
     url(r'^ajax/', include('paprika.ajax.urls')),
-    url(r'^oauth2/', include('paprika.oauth2.urls')),
+    url(r'^api/', include(v1_api.urls)),
+#    url(r'^oauth2/', include('paprika.oauth2.urls')),
     url(r'^test_auth/', 'paprika.views.test_auth'),
     
     # Examples:
