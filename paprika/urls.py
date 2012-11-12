@@ -1,8 +1,9 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from paprika.api.orders import *
+from paprika.api.orderfeed import *
 from tastypie.api import Api
-import settings
+#import settings
 admin.autodiscover()
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -10,6 +11,8 @@ admin.autodiscover()
 
 v1_api = Api(api_name='v1')
 v1_api.register(BuisnessProfileResource())
+v1_api.register(OrderFeedResource())
+
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
@@ -24,7 +27,7 @@ urlpatterns = patterns('',
     url(r'^api/', include(v1_api.urls)),
 #    url(r'^oauth2/', include('paprika.oauth2.urls')),
     url(r'^test_auth/', 'paprika.views.test_auth'),
-    
+
     # Examples:
     # url(r'^$', 'paprika.views.home', name='home'),
     # url(r'^paprika/', include('paprika.foo.urls')),
