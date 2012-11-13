@@ -60,7 +60,7 @@ class Order(models.Model):
 class FeedEntry(models.Model):
   body = models.CharField(max_length=300)
   time_entered = models.DateTimeField(auto_now_add=True)
-  order = models.ForeignKey(Order, related_name="feed_entries")
+  order = models.ForeignKey(Order, related_name="feeds")
   def __unicode__(self):
     return self.body
 
