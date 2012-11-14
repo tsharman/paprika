@@ -2,7 +2,8 @@ from tastypie.resources import ModelResource, ALL
 from tastypie import fields
 from paprika.models import BusinessProfile, Order, Stage, Flow
 from tastypie.authorization import Authorization
-
+from tastypie.authorization import DjangoAuthorization
+from paprika.authentication import TwoLeggedOAuthAuthentication
 
 class StageProxy(ModelResource):
     class Meta:
