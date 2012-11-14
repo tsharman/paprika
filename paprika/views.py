@@ -3,8 +3,11 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from paprika.models import BusinessProfile
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
+from django.template import RequestContext
 from paprika.forms import NewUserForm
+from django.contrib.admin.views.decorators import staff_member_required
+from datetime import date
 
 
 def index(request):
@@ -44,6 +47,9 @@ def signout(request):
   logout(request)
   return HttpResponseRedirect('/')
 
-@login_required(login_url='/')
-def orders(request):
-  return render(request, 'orders.html')
+@staff_member_required
+def dash(request):
+  users = User.objects.all()
+  users_today = User.objects.filter(date_joined__gte = date.today())
+  return render_to_response('dash.html', { "users" : users, "users_today" : users_today }, context_instance=RequestContext(request))
+

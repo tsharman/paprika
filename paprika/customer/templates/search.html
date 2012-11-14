@@ -31,20 +31,39 @@
   <div id="dialogs">
   </div>
   <div id="container">
-    <img src="{{ STATIC_URL }}img/logo.png" />
-    <h1>Paprika</h1>
-    <p>Type your phone number or email address below:</p>
-    <form action="/cu/search/" method="POST">
-      {% csrf_token %}
-      <input type="text" name="search_query" />
-      <input type="submit" class="btn btn_green" value="Find my order!"/>
-    </form>
+    <div id="header">
+      <img src="{{ STATIC_URL }}img/logo.png" />
+      <h1>Paprika</h1>
+      <p>Type your phone number or email address below:</p>
+      <form action="/cu/search/" method="POST">
+        {% csrf_token %}
+        <input type="text" name="search_query" />
+        <input type="submit" class="btn btn_green" value="Find my order!"/>
+      </form>
+    </div>
     {% if order_results %} 
     <div id="search_results">
       {% for result in order_results %}
         <div class="search_result">
           <h2 class="business_name">{{ result.merchant.business_name }}</h2>
           <h3 class="time_entered">{{ result.time_entered }}</h3>
+          <div class="stages">
+          {% for stage in result.flow.sorted_stages %}
+            <div
+              {% if stage == result.current_stage %}
+                class="stage active"
+              {% else %}
+                class="stage"
+              {% endif %}
+              data-stageid={{ stage.id }} style='width: {% widthratio 587 result.flow.stages.count 1 %}px;'>
+              <div class="status_bar">{{ forloop.counter }}</div>
+              <h4 class="start_here">Move here.</h4>
+              <h4 class="stage_title">{{ stage.title }}</h4>
+            </div>
+          {% endfor %}
+        </div>
+      
+      
         </div>
       {% endfor %}
     </div>
