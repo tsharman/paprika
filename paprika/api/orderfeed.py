@@ -8,7 +8,8 @@ class FeedProxy(ModelResource):
     class Meta:
         queryset = FeedEntry.objects.all()
         fields = ['body', 'time_entered']
-
+        include_resource_uri = False
+        
 
 class OrderFeedResource(ModelResource):
     class Meta:
