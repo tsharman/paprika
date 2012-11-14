@@ -28,16 +28,15 @@ class Stage(models.Model):
   notes = models.CharField(max_length=300, blank=True)
   deleted = models.BooleanField(default=False)
   def __unicode__(self):
-    return self.title
+    return self.title 
 
 class Order(models.Model):
   flow = models.ForeignKey(Flow, related_name="orders")
   merchant = models.ForeignKey(BusinessProfile, related_name="orders")
   current_stage = models.ForeignKey(Stage)
   cust_name = models.CharField(max_length=50)
-  cust_phone = PhoneNumberField(default='000-000-0000')
-  cust_email = models.EmailField(max_length=254, default='none@none.com')
-  notes = models.CharField(max_length=300, default='', blank=True)
+  cust_phone = PhoneNumberField()
+  cust_email = models.EmailField(max_length=254)
   time_entered = models.DateTimeField(auto_now_add=True)
   STATE_CHOICES = (
     ('current', 'current'),
@@ -58,14 +57,31 @@ class Order(models.Model):
     ret['flow'] = self.flow.id
     return json.dumps(ret)
 
-
 class FeedEntry(models.Model):
   body = models.CharField(max_length=300)
   time_entered = models.DateTimeField(auto_now_add=True)
-  order = models.ForeignKey(Order, related_name="feed_entries")
+  order = models.ForeignKey(Order, related_name="feeds")
+  def __unicode__(self):
+    return self.body
+
+class OAuthConsumer(models.Model):
+
+    name = models.CharField(max_length=255)
+    key = models.CharField(max_length=255)
+    secret = models.CharField(max_length=255)
+    active = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = "api_oauth_consumer"
+
+    def __unicode__(self):
+         return u'%s' % (self.name)
+
 
 admin.site.register(FeedEntry)
 admin.site.register(Order)
 admin.site.register(Flow)
 admin.site.register(Stage)
 admin.site.register(BusinessProfile)
+admin.site.register(OAuthConsumer)
+

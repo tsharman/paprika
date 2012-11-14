@@ -53,3 +53,7 @@ def dash(request):
   users_today = User.objects.filter(date_joined__gte = date.today())
   return render_to_response('dash.html', { "users" : users, "users_today" : users_today }, context_instance=RequestContext(request))
 
+@login_required(login_url='/')
+def orders(request):
+  return render(request, 'orders.html')
+
