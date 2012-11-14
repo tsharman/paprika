@@ -28,7 +28,7 @@ class OrderProxy(ModelResource):
     flow = fields.ToOneField(FlowProxy, 'flow', full=True)
 
 
-class BuisnessProfileResource(ModelResource):
+class BusinessProfileResource(ModelResource):
     class Meta:
         detail_allowed_methods = ['get']
         list_allowed_methods = []
