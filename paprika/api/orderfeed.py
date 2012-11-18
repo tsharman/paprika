@@ -1,10 +1,8 @@
 from tastypie.resources import ModelResource
 from tastypie import fields
 from paprika.models import Order, FeedEntry
-from tastypie.authorization import Authorization
 from tastypie.authorization import DjangoAuthorization
-from paprika.authentication import TwoLeggedOAuthAuthentication
-
+from tastypie.authentication import BasicAuthentication
 
 class FeedProxy(ModelResource):
     class Meta:
@@ -21,5 +19,5 @@ class OrderFeedResource(ModelResource):
         include_resource_uri = False
         resource_name = 'feed'
         authorization = DjangoAuthorization()
-        authentication = TwoLeggedOAuthAuthentication()
+        authentication = BasicAuthentication()
     feeds = fields.ToManyField(FeedProxy, 'feeds', full=True)

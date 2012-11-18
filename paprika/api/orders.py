@@ -1,9 +1,8 @@
 from tastypie.resources import ModelResource, ALL
 from tastypie import fields
 from paprika.models import BusinessProfile, Order, Stage, Flow
-from tastypie.authorization import Authorization
 from tastypie.authorization import DjangoAuthorization
-from paprika.authentication import TwoLeggedOAuthAuthentication
+from tastypie.authentication import BasicAuthentication
 
 class StageProxy(ModelResource):
     class Meta:
@@ -36,7 +35,7 @@ class BusinessProfileResource(ModelResource):
         queryset = BusinessProfile.objects.all()
         resource_name = 'business'
         authorization = DjangoAuthorization()
-        authentication = TwoLeggedOAuthAuthentication()
+        authentication = BasicAuthentication()
     orders = fields.ToManyField(OrderProxy, 'orders', full=True)
 
     def determine_format(self, request):
