@@ -1,6 +1,6 @@
 $(document).ready(function() {
   currentSlide = $("#heading");
-/*  $(document).keydown(function(e) {
+  $(document).keydown(function(e) {
     if(e.keyCode == 40) {
       if($(currentSlide).next().hasClass('slide')) {
         currentSlide = $(currentSlide).next();
@@ -8,13 +8,14 @@ $(document).ready(function() {
       $('html, body').animate({ scrollTop: currentSlide.offset().top + 200 }, { duration : 'slow', easing : 'swing' });
     }
     else if(e.keyCode == 38) {
+      console.log($(currentSlide).prev());
       if($(currentSlide).prev().hasClass('slide')) {
         currentSlide = $(currentSlide).prev();
+        $('html, body').animate({ scrollTop: currentSlide.offset().top }, { duration : 'slow', easing : 'swing' }); 
       }
-      $('html, body').animate({ scrollTop: currentSlide.offset().top + 200 }, { duration : 'slow', easing : 'swing' });
     }
   });
-  */
+  
   $(".close_dialog").click(function() {
     $(this).parent().fadeOut(200, function() {
       $("#dialogs").fadeOut(200);
