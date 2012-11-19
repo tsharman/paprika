@@ -3,6 +3,7 @@
 *.pyc
 *.swp
 local_settings.py
+django_local.wsgi
 css/
 *~
 *.swp
