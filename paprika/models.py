@@ -53,7 +53,6 @@ class Order(models.Model):
     ret['cust_name'] = self.cust_name
     ret['cust_phone'] = self.cust_phone
     ret['cust_email'] = self.cust_email
-    ret['notes'] = self.notes
     ret['flow'] = self.flow.id
     return json.dumps(ret)
 
