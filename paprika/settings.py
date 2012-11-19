@@ -4,10 +4,7 @@ import os.path
 from paprika.local_settings import *
 
 import socket
-if socket.gethostname() == 'paprika.io':
-    DEBUG = False
-else:
-    DEBUG = True
+DEBUG = local_debug
 
 TEMPLATE_DEBUG = DEBUG
 
@@ -26,7 +23,7 @@ DATABASES = {
         'USER': db_user,                      # Not used with sqlite3.
         'PASSWORD': db_pass,                  # Not used with sqlite3.
         'HOST': db_host,                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'PORT': db_port,                      # Set to empty string for default. Not used with sqlite3.
     }
 }
 
