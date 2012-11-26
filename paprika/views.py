@@ -13,6 +13,9 @@ from datetime import date
 def index(request):
   return render(request, 'index.html')
 
+def investors(request):
+  return render(request, 'investors.html')
+
 def signup(request):
   if request.method == 'POST':
     form = NewUserForm(request.POST)
@@ -39,7 +42,9 @@ def signin(request):
       else:
         return HttpResponse('You have been banned!')
     else:
-      return HttpResponse('Login Failed!')
+      return HttpResponseRedirect('/login/')
+  elif request.method == 'GET':
+    return render(request, 'signin.html')
   else:
     return HttpResponseRedirect('/bu/')
 

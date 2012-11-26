@@ -26,4 +26,5 @@ urlpatterns = patterns('',
     url(r'^ajax/', include('paprika.ajax.urls')),
     url(r'^dash/', 'paprika.views.dash'),
     url(r'^api/', include(v1_api.urls)),
+    url(r'^investors/', 'paprika.views.investors')
 )
