@@ -35,6 +35,7 @@ class BusinessProfileResource(ModelResource):
     include_resource_uri = False
     queryset = BusinessProfile.objects.all()
     resource_name = 'profile'
+    authentication = BasicAuthentication()
     authorization = Authorization()
   orders = fields.ToManyField(OrderProxy, 'orders', full=True)
 

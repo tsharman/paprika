@@ -19,4 +19,5 @@ class OrderResource(ModelResource):
         include_resource_uri = False
         resource_name = 'order'
         authorization = Authorization()
+        authentication = BasicAuthentication()
     feeds = fields.ToManyField(FeedProxy, 'feeds', full=True)
