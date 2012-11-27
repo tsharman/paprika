@@ -30,7 +30,7 @@ class OrderProxy(ModelResource):
 
 class BusinessProfileResource(ModelResource):
   class Meta:
-    detail_allowed_methods = ['get']
+    detail_allowed_methods = []
     list_allowed_methods = ['get']
     include_resource_uri = False
     queryset = BusinessProfile.objects.all()
