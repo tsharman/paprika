@@ -41,3 +41,6 @@ class BusinessProfileResource(ModelResource):
 
   def determine_format(self, request):
     return "application/json"
+
+  def apply_authorization_limits(self, request, object_list):
+    return object_list.filter(user=request.user)
