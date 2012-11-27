@@ -23,7 +23,7 @@ class FlowProxy(ModelResource):
 class OrderProxy(ModelResource):
   class Meta:
     queryset = Order.objects.all()
-    fields = ['cust_name', 'cust_phone', 'cust_email', 'time_entered', 'state']
+    fields = ['cust_name', 'cust_phone', 'cust_email', 'time_entered', 'state', 'id']
     include_resource_uri = False
   flow = fields.ToOneField(FlowProxy, 'flow', full=True)
 
