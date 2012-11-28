@@ -89,7 +89,7 @@ def edit_order(request):
 def feed(request):
   if request.method == 'GET':
     order_id = request.GET.get('order_id')
-    entries = Order.objects.get(id = order_id).feed_entries.order_by('-time_entered').all
+    entries = Order.objects.get(id = order_id).feeds.order_by('-time_entered').all
     return render_to_response('fragments/feed.html', {'entries': entries})
   elif request.method == 'POST':
     order_id = request.POST.get('order_id')
