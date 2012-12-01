@@ -31,9 +31,9 @@ class Stage(models.Model):
     return self.title 
 
 class Order(models.Model):
-  flow = models.ForeignKey(Flow, related_name="orders")
+  flow = models.ForeignKey(Flow, related_name="flows")
   merchant = models.ForeignKey(BusinessProfile, related_name="orders")
-  current_stage = models.ForeignKey(Stage)
+  current_stage = models.ForeignKey(Stage, blank=True, null=True)
   cust_name = models.CharField(max_length=50)
   cust_phone = PhoneNumberField()
   cust_email = models.EmailField(max_length=254)
@@ -55,6 +55,14 @@ class Order(models.Model):
     ret['cust_email'] = self.cust_email
     ret['flow'] = self.flow.id
     return json.dumps(ret)
+
+  def save(self, *args, **kwargs):
+    if not self.pk: 
+      #we allow current_stage not to be set, 
+      #because we set it on save
+      self.current_stage = self.flow.stages.get(stage_num=1)
+    super(Order, self).save(*args, **kwargs)
+
 
 class FeedEntry(models.Model):
   body = models.CharField(max_length=300)
