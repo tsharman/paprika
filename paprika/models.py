@@ -58,8 +58,7 @@ class Order(models.Model):
 
   def save(self, *args, **kwargs):
     if not self.pk: 
-      #we allow current_stage not to be set, 
-      #because we set it on save
+      #we allow current_stage not to be set, because we set it on save
       self.current_stage = self.flow.stages.get(stage_num=1)
     super(Order, self).save(*args, **kwargs)
 

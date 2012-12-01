@@ -4,14 +4,14 @@ from paprika.models import *
 from tastypie.authorization import Authorization
 from tastypie.authentication import BasicAuthentication
 from django.forms import ModelForm
-from paprika.api.validation import ModelFormValidation
+from paprika.validation import ModelFormValidation
 
 class StageResource(ModelResource):
     class Meta:
         resource_name = 'stage'
         queryset = Stage.objects.all()
         detail_allowed_methods = ['get']
-        list_allowed_methods = ['get']
+        list_allowed_methods = []
         authorization = Authorization()
         authentication = BasicAuthentication()
         include_resource_uri = True
@@ -21,7 +21,7 @@ class FlowResource(ModelResource):
         resource_name = 'flow'
         queryset = Flow.objects.all()
         detail_allowed_methods = ['get']
-        list_allowed_methods = ['get']
+        list_allowed_methods = []
         authorization = Authorization()
         authentication = BasicAuthentication()
         include_resource_uri = True
@@ -49,7 +49,7 @@ class OrderResource(ModelResource):
     class Meta:
         queryset = Order.objects.all()
         detail_allowed_methods = ['get']
-        list_allowed_methods = ['get','post']
+        list_allowed_methods = ['post']
         include_resource_uri = False
         validation = ModelFormValidation(form_class=OrderResourceForm)
         resource_name = 'order'     
