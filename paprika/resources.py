@@ -27,19 +27,6 @@ class FlowResource(ModelResource):
         include_resource_uri = True
     stages = fields.ToManyField(StageResource, 'stages', full=True)
 
-class FeedEntryResource(ModelResource):
-    class Meta:
-        queryset = FeedEntry.objects.all()
-        detail_allowed_methods = ['get']
-        list_allowed_methods = ['post']
-        include_resource_uri = False
-        resource_name = 'feed'
-        authorization = Authorization()
-        authentication = BasicAuthentication()
-
-    #must make sure only can make a feed if authorized for that order's user
-    #def obj_create(self, bundle, request=None, **kwargs):
-    #    return super(OrderResource, self).obj_create(bundle, request, merchant=request.user.business)
 
 class OrderResourceForm(ModelForm):
     class Meta:
@@ -57,7 +44,7 @@ class OrderResource(ModelResource):
         authentication = BasicAuthentication()
     flow = fields.ToOneField(FlowResource, 'flow', full=False)
     current_stage = fields.ToOneField(StageResource, 'current_stage', full=False)   
-    feeds = fields.ToManyField(FeedEntryResource, 'feeds', full=True) 
+    #feeds = fields.ToManyField(FeedEntryResource, 'feeds', full=True) 
 
     def determine_format(self, request):
         return "application/json"
@@ -67,6 +54,24 @@ class OrderResource(ModelResource):
 
     def apply_authorization_limits(self, request, object_list):
         return object_list.filter(merchant=request.user.business)
+
+
+#current problem, feedentry has to be below order to have an order,
+#and has to be above for order to have feeds...
+class FeedEntryResource(ModelResource):
+    class Meta:
+        queryset = FeedEntry.objects.all()
+        detail_allowed_methods = ['get']
+        list_allowed_methods = ['post']
+        include_resource_uri = False
+        resource_name = 'feed'
+        authorization = Authorization()
+        authentication = BasicAuthentication()
+    order = fields.ToOneField(OrderResource, 'order', full=False)
+
+    #must make sure only can make a feed if authorized for that order's user
+    #def obj_create(self, bundle, request=None, **kwargs):
+    #    return super(OrderResource, self).obj_create(bundle, request, merchant=request.user.business)
 
 class BusinessProfileResource(ModelResource):
   class Meta:
