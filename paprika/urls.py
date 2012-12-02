@@ -1,9 +1,6 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from paprika.api.businessprofile import *
-from paprika.api.order import *
-from paprika.api.feed import *
-from paprika.api.flow import *
+from paprika.resources import *
 from tastypie.api import Api
 #import settings
 admin.autodiscover()
@@ -14,9 +11,10 @@ admin.autodiscover()
 v1_api = Api(api_name='v1')
 v1_api.register(BusinessProfileResource())
 v1_api.register(OrderResource())
-v1_api.register(FeedResource())
+v1_api.register(OrderFeedResource())
+v1_api.register(FeedEntryResource())
 v1_api.register(FlowResource())
-
+v1_api.register(StageResource())
 
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
