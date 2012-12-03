@@ -5,8 +5,10 @@
   <title>Paprika</title>
   <link rel="icon" type="image/png" href="{{ STATIC_URL }}img/favicon.png">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script> 
+  <script src="{{ STATIC_URL }}js/jquery.cookie.js"></script> 
+  <script src="{{ STATIC_URL }}js/search.js"></script>
   <link href='http://fonts.googleapis.com/css?family=Sanchez' rel='stylesheet' type='text/css'>
-{% compress css %}
+  {% compress css %}
   <link rel="stylesheet" type="text/less" href="{{ STATIC_URL }}less/search.less" />
   {% endcompress %}
   <meta name="title" content="Paprika" />
@@ -28,6 +30,15 @@
 
 </head>
 <body>
+  <div id="dialogs">
+    <div id="feed_dialog" class="dialog">
+      <div class="close_dialog">x</div>
+      <h2 class="title">Order Feed</h2>
+      <div id="feed_list">
+      </div>
+    </div>
+  </div>
+
   <a id="business_btn" href="/business/" class="btn btn_green">I'm a business</a>
   <div id="dialogs">
   </div>
@@ -44,19 +55,20 @@
     </div>
     {% if order_results %} 
     <div id="search_results">
-      {% for result in order_results %}
-        <div class="search_result">
-          <h2 class="business_name">{{ result.merchant.business_name }}</h2>
-          <h3 class="time_entered">{{ result.time_entered }}</h3>
+      {% for order in order_results %}
+        <div class="search_result" data-orderid={{ order.id }}>
+          <h2 class="business_name">{{ order.merchant.business_name }}</h2>
+          <h3 class="time_entered">{{ order.time_entered }}</h3>
+          <div class="btn btn_green feed_btn">Feed</div>
           <div class="stages">
-          {% for stage in result.flow.sorted_stages %}
+          {% for stage in order.flow.sorted_stages %}
             <div
-              {% if stage == result.current_stage %}
+              {% if stage == order.current_stage %}
                 class="stage active"
               {% else %}
                 class="stage"
               {% endif %}
-              data-stageid={{ stage.id }} style='width: {% widthratio 587 result.flow.stages.count 1 %}px;'>
+              data-stageid={{ stage.id }} style='width: {% widthratio 587 order.flow.stages.count 1 %}px;'>
               <div class="status_bar">{{ forloop.counter }}</div>
               <h4 class="start_here">Move here.</h4>
               <h4 class="stage_title">{{ stage.title }}</h4>

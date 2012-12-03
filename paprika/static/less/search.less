@@ -33,7 +33,6 @@
 #search_results {
   width: 600px;
   margin: 30px auto 0px auto;
-  border: 1px solid #999;
   padding: 10px;
 }
 .search_result {
@@ -41,8 +40,13 @@
   padding: 5px;
   box-shadow: 0px 0px 2px 2px #ccc; 
   margin-bottom: 20px;
-  cursor: pointer;
+  position: relative;
 }
+  .search_result .feed_btn {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
   .search_result .business_name {
     font-size: 20px;
   }
@@ -57,3 +61,37 @@
   .stage:hover {
     background: #eee !important;
   }
+
+
+
+
+#feed_dialog {
+  height: 80%;
+  margin-top: 20px;
+}
+#feed_list {
+  height: 80%;
+  overflow: scroll;
+  margin-top: 20px;
+}
+  #feed_list .feed_entry {
+    padding: 10px 10px;
+    position: relative;
+    cursor: pointer;
+  }
+    #feed_list .feed_entry:hover {
+      background: #eee;
+    }
+    #feed_list .feed_entry .feed_timestamp {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      color: #ccc;
+      font-size: 13px;
+    }
+    #feed_list .feed_entry .feed_body {
+      font-size: 15px;
+      width: 330px;
+    }
+
+
