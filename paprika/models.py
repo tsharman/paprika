@@ -31,9 +31,9 @@ class Stage(models.Model):
     return self.title 
 
 class Order(models.Model):
-  flow = models.ForeignKey(Flow, related_name="orders")
+  flow = models.ForeignKey(Flow, related_name="flows")
   merchant = models.ForeignKey(BusinessProfile, related_name="orders")
-  current_stage = models.ForeignKey(Stage)
+  current_stage = models.ForeignKey(Stage, blank=True, null=True)
   cust_name = models.CharField(max_length=50)
   cust_phone = PhoneNumberField()
   cust_email = models.EmailField(max_length=254)
@@ -56,6 +56,12 @@ class Order(models.Model):
     ret['flow'] = self.flow.id
     return json.dumps(ret)
 
+  def save(self, *args, **kwargs):
+    if not self.pk: 
+      #we allow current_stage not to be set, because we set it on save
+      self.current_stage = self.flow.stages.get(stage_num=1)
+    super(Order, self).save(*args, **kwargs)
+
 class FeedEntry(models.Model):
   body = models.CharField(max_length=300)
   time_entered = models.DateTimeField(auto_now_add=True)
@@ -63,23 +69,8 @@ class FeedEntry(models.Model):
   def __unicode__(self):
     return self.body
 
-class OAuthConsumer(models.Model):
-  name = models.CharField(max_length=255)
-  key = models.CharField(max_length=255)
-  secret = models.CharField(max_length=255)
-  active = models.BooleanField(default=True)
-
-  class Meta:
-    db_table = "api_oauth_consumer"
-
-  def __unicode__(self):
-    return u'%s' % (self.name)
-
-
 admin.site.register(FeedEntry)
-admin.site.register(Order)
 admin.site.register(Flow)
 admin.site.register(Stage)
 admin.site.register(BusinessProfile)
-admin.site.register(OAuthConsumer)
 

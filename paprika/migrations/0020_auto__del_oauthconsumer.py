@@ -8,28 +8,20 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'OAuthConsumer'
-        db.create_table('api_oauth_consumer', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('key', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('secret', self.gf('django.db.models.fields.CharField')(max_length=255)),
-            ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
-        ))
-        db.send_create_signal('paprika', ['OAuthConsumer'])
-
-        # Deleting field 'Order.notes'
-        db.delete_column('paprika_order', 'notes')
-
-
-    def backwards(self, orm):
         # Deleting model 'OAuthConsumer'
         db.delete_table('api_oauth_consumer')
 
-        # Adding field 'Order.notes'
-        db.add_column('paprika_order', 'notes',
-                      self.gf('django.db.models.fields.CharField')(default='', max_length=300, blank=True),
-                      keep_default=False)
+
+    def backwards(self, orm):
+        # Adding model 'OAuthConsumer'
+        db.create_table('api_oauth_consumer', (
+            ('name', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('secret', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('key', self.gf('django.db.models.fields.CharField')(max_length=255)),
+            ('active', self.gf('django.db.models.fields.BooleanField')(default=True)),
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+        ))
+        db.send_create_signal('paprika', ['OAuthConsumer'])
 
 
     models = {
@@ -89,21 +81,13 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'owner': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'flows'", 'to': "orm['paprika.BusinessProfile']"})
         },
-        'paprika.oauthconsumer': {
-            'Meta': {'object_name': 'OAuthConsumer', 'db_table': "'api_oauth_consumer'"},
-            'active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
-            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'key': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '255'}),
-            'secret': ('django.db.models.fields.CharField', [], {'max_length': '255'})
-        },
         'paprika.order': {
             'Meta': {'object_name': 'Order'},
-            'current_stage': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['paprika.Stage']"}),
+            'current_stage': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['paprika.Stage']", 'null': 'True', 'blank': 'True'}),
             'cust_email': ('django.db.models.fields.EmailField', [], {'max_length': '254'}),
             'cust_name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             'cust_phone': ('django.contrib.localflavor.us.models.PhoneNumberField', [], {'max_length': '20'}),
-            'flow': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'orders'", 'to': "orm['paprika.Flow']"}),
+            'flow': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'flows'", 'to': "orm['paprika.Flow']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'merchant': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'orders'", 'to': "orm['paprika.BusinessProfile']"}),
             'state': ('django.db.models.fields.CharField', [], {'default': "'current'", 'max_length': '10'}),
