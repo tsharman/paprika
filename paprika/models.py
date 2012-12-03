@@ -70,7 +70,6 @@ class FeedEntry(models.Model):
     return self.body
 
 admin.site.register(FeedEntry)
-admin.site.register(Order)
 admin.site.register(Flow)
 admin.site.register(Stage)
 admin.site.register(BusinessProfile)

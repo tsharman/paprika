@@ -14,7 +14,7 @@ class BusinessProfileResource(ModelResource):
     list_allowed_methods = ['get']
     authentication = BasicAuthentication()
     authorization = Authorization()
-  orders = fields.ToManyField("paprika.resources.OrderResource", 'orders', full=True)
+  orders = fields.ToManyField("paprika.resources.OrderProxyResource", 'orders', full=True)
 
   def determine_format(self, request):
     return "application/json"
@@ -22,6 +22,10 @@ class BusinessProfileResource(ModelResource):
   def apply_authorization_limits(self, request, object_list):
     return object_list.filter(user=request.user)
 
+
+class OrderProxyResource(ModelResource):
+    class Meta:
+        queryset = Order.objects.all()
 
 class OrderResourceForm(ModelForm):
     class Meta:
@@ -33,13 +37,15 @@ class OrderResource(ModelResource):
     class Meta:
         resource_name = 'order'   
         queryset = Order.objects.all()
-        detail_allowed_methods = []
+        detail_allowed_methods = ['get']
         list_allowed_methods = ['post']
         validation = ModelFormValidation(form_class=OrderResourceForm)
         authorization = Authorization() # no op authorization
         authentication = BasicAuthentication()
-    flow = fields.ToOneField("paprika.resources.FlowResource", 'flow', full=False)   
+    flow = fields.ToOneField("paprika.resources.FlowResource", 'flow', full=True)   
     merchant = fields.ToOneField("paprika.resources.BusinessProfileResource", 'merchant', full=False) 
+    feeds = fields.ToManyField("paprika.resources.FeedEntryResource", 'feeds', full=True, blank=True) 
+    current_stage = fields.ToOneField("paprika.resources.StageResource", 'current_stage', full=True)  
 
     def determine_format(self, request):
         return "application/json"
@@ -47,22 +53,6 @@ class OrderResource(ModelResource):
     def obj_create(self, bundle, request=None, **kwargs):
         return super(OrderResource, self).obj_create(bundle, request, merchant=request.user.business)
 
-#Order Feed Resource is the endpoint which gives all 
-#the details associated with a particular order, including
-#the current stage, and all of the feed entries
-class OrderFeedResource(ModelResource):
-    class Meta:
-        resource_name = 'orderfeed'     
-        queryset = Order.objects.all()
-        list_allowed_methods = []
-        detail_allowed_methods = ['get']
-        authorization = Authorization() # no op authorization
-        authentication = BasicAuthentication()
-    feeds = fields.ToManyField("paprika.resources.FeedEntryResource", 'feeds', full=True) 
-    current_stage = fields.ToOneField("paprika.resources.StageResource", 'current_stage', full=True)
-    
-    def determine_format(self, request):
-        return "application/json"    
 
 class StageResource(ModelResource):
     class Meta:
@@ -95,7 +85,6 @@ class FeedEntryResource(ModelResource):
         authorization = Authorization()
         authentication = BasicAuthentication()
     order = fields.ToOneField("paprika.resources.OrderResource", 'order', full=False)
-    #TODO: restrict feed creation to authorized business profiles
 
 
 

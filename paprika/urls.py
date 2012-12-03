@@ -11,7 +11,6 @@ admin.autodiscover()
 v1_api = Api(api_name='v1')
 v1_api.register(BusinessProfileResource())
 v1_api.register(OrderResource())
-v1_api.register(OrderFeedResource())
 v1_api.register(FeedEntryResource())
 v1_api.register(FlowResource())
 v1_api.register(StageResource())
@@ -28,5 +27,6 @@ urlpatterns = patterns('',
     url(r'^ajax/', include('paprika.ajax.urls')),
     url(r'^dash/', 'paprika.views.dash'),
     url(r'^api/', include(v1_api.urls)),
-    url(r'^investors/', 'paprika.views.investors')
+    url(r'^investors/', 'paprika.views.investors'),
+    url(r'^rpc/v1/move_stage', 'paprika.rpcs.move_stage')
 )
